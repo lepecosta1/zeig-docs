@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZEIG · Painel Integrado de Entregas</title>
+<style>
+  :root{--denim:#1e3a5f;--indigo:#27418f;--claro:#eef2fa;--ok:#1a7f4e;--alerta:#b3261e;--areia:#f7f6f2;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--areia);color:#1c1c1e;font-size:16px;line-height:1.55}
+  .wrap{max-width:640px;margin:0 auto;padding:16px 14px 60px}
+  header{background:linear-gradient(135deg,var(--denim),var(--indigo));color:#fff;border-radius:14px;padding:22px 18px;margin-bottom:14px}
+  header .marca{font-weight:800;letter-spacing:3px;font-size:13px;opacity:.85}
+  header h1{font-size:22px;margin-top:6px;line-height:1.25}
+  header p{font-size:13px;opacity:.85;margin-top:8px}
+  .progresso{background:#fff;border:1px solid #e4e2da;border-radius:12px;padding:14px 16px;margin-bottom:14px}
+  .progresso .barra{height:10px;background:#e8e6df;border-radius:99px;overflow:hidden;margin-top:8px}
+  .progresso .fill{height:100%;background:linear-gradient(90deg,var(--indigo),var(--ok));width:0%;transition:width .4s}
+  .progresso .txt{font-size:13px;color:#555}
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+  .kpi{background:#fff;border:1px solid #e4e2da;border-radius:12px;padding:12px 8px;text-align:center}
+  .kpi .v{font-size:20px;font-weight:800;color:var(--indigo)}
+  .kpi .l{font-size:10px;color:#777;text-transform:uppercase;margin-top:3px}
+  .card{background:#fff;border:1px solid #e4e2da;border-radius:12px;padding:16px;margin-bottom:14px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+  h2{font-size:17px;color:var(--denim);margin-bottom:6px}
+  .sub{font-size:12px;color:#888;margin-bottom:10px}
+  p{margin-bottom:8px}
+  details{background:#fff;border:1px solid #e4e2da;border-radius:12px;margin-bottom:10px;overflow:hidden}
+  summary{padding:14px 16px;font-weight:700;font-size:15px;cursor:pointer;color:var(--denim);list-style:none;display:flex;justify-content:space-between;align-items:center}
+  summary::after{content:"▾";color:#999} details[open] summary::after{content:"▴"}
+  details .corpo{padding:0 16px 14px}
+  .badge{display:inline-block;padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700}
+  .b-ok{background:#e3f4ea;color:var(--ok)} .b-no{background:#fde9e7;color:var(--alerta)} .b-info{background:var(--claro);color:var(--indigo)}
+  .todo{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #f0efe9}
+  .todo:last-child{border-bottom:0}
+  .todo input{width:22px;height:22px;accent-color:var(--indigo);flex-shrink:0;margin-top:2px}
+  .fase{display:flex;gap:12px;padding:8px 0;font-size:14px}
+  .fase .dot{width:12px;height:12px;border-radius:99px;margin-top:5px;flex-shrink:0}
+  .d-ok{background:var(--ok)} .d-now{background:#e8a13d} .d-fut{background:#c9c7bf}
+  footer{text-align:center;font-size:12px;color:#999;margin-top:24px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="marca">ZEIG · DENIM</div>
+  <h1>Painel Integrado — Automação 360°</h1>
+  <p>Cockpit + ERP Produção + Marketplaces · Junho/2026</p>
+</header>
+
+<div class="progresso">
+  <div class="txt"><b>Progresso dos to-dos da equipe</b> · <span id="ptxt">0 de 0</span></div>
+  <div class="barra"><div class="fill" id="pfill"></div></div>
+</div>
+
+<div class="kpis">
+  <div class="kpi"><div class="v">7</div><div class="l">entregas prontas</div></div>
+  <div class="kpi"><div class="v">37</div><div class="l">testes passando</div></div>
+  <div class="kpi"><div class="v">2</div><div class="l">ERPs no plano</div></div>
+</div>
+
+<div class="card">
+  <h2>🎯 Onde estamos</h2>
+  <p><b>Concluído em ambiente local seguro</b> (produção intocada): custos reais do ML automáticos, devolução de marketplace corrigida (caso real bate com o extrato), kits por SKU prontos, canais novos com detecção automática, regras de custo por canal e painel de monitoramento.</p>
+  <p><span class="badge b-info">aguardando</span> revisão do Omar (segunda) para subir à nuvem.</p>
+</div>
+
+<details open>
+  <summary>👤 OMAR — decisões (6)</summary>
+  <div class="corpo">
+    <div class="todo"><input type="checkbox" data-k="om1"><div>Revisar e aprovar o <b>Pull Request</b> (GitHub)</div></div>
+    <div class="todo"><input type="checkbox" data-k="om2"><div>Decidir a <b>publicação no Netlify</b> (cota 75%: auto-deploy ou manual)</div></div>
+    <div class="todo"><input type="checkbox" data-k="om3"><div>Criar <b>app de API do TikTok Shop</b> (Partner Center → App Key/Secret)</div></div>
+    <div class="todo"><input type="checkbox" data-k="om4"><div><b>Trocar a senha</b> do TikTok (higiene de segurança)</div></div>
+    <div class="todo"><input type="checkbox" data-k="om5"><div>Informar <b>onde mora o confeccao-erp</b> (repo + hospedagem)</div></div>
+    <div class="todo"><input type="checkbox" data-k="om6"><div>Opcional: <b>solicitar revisão</b> da reclamação no ML (reputação)</div></div>
+  </div>
+</details>
+
+<details open>
+  <summary>👤 ALEXANDRE — anúncios (5)</summary>
+  <div class="corpo">
+    <div class="todo"><input type="checkbox" data-k="ax1"><div>1 anúncio teste <b>kit homogêneo</b> (K2-111001ZD-42)</div></div>
+    <div class="todo"><input type="checkbox" data-k="ax2"><div>1 anúncio teste <b>kit misto</b> (K-111001ZD+111002ZD-42)</div></div>
+    <div class="todo"><input type="checkbox" data-k="ax3"><div>Avisar Leandro p/ <b>validar no sandbox</b></div></div>
+    <div class="todo"><input type="checkbox" data-k="ax4"><div>Cadastrar os demais kits com a convenção</div></div>
+    <div class="todo"><input type="checkbox" data-k="ax5"><div>Mesma convenção nos canais novos (Shein/Shopee/Amazon)</div></div>
+  </div>
+</details>
+
+<details open>
+  <summary>👤 LEANDRO — orquestração (6)</summary>
+  <div class="corpo">
+    <div class="todo"><input type="checkbox" data-k="le1"><div>Rodar o <b>roteiro de 6 checagens</b> no sandbox local</div></div>
+    <div class="todo"><input type="checkbox" data-k="le2"><div>Enviar os documentos ao Alexandre e ao Omar</div></div>
+    <div class="todo"><input type="checkbox" data-k="le3"><div>Cobrar os anúncios de teste do Alexandre</div></div>
+    <div class="todo"><input type="checkbox" data-k="le4"><div>Reunião de segunda com Omar (PR/deploy/TikTok/2º ERP)</div></div>
+    <div class="todo"><input type="checkbox" data-k="le5"><div>Garantir troca da senha do TikTok</div></div>
+    <div class="todo"><input type="checkbox" data-k="le6"><div>Manter o CHECKLIST-ENTREGAS.txt atualizado</div></div>
+  </div>
+</details>
+
+<details>
+  <summary>🤖 IA (Claude) — fila de execução</summary>
+  <div class="corpo">
+    <p><span class="badge b-ok">feito</span> Fix ML · kits · canais · regras de custo · devolução marketplace · painel Canais · sandbox + seed</p>
+    <p><span class="badge b-info">na fila</span> 1. Transportadora por venda (Amaral Flex/J3/Mercado Envios) · 2. Abrir o PR · 3. Re-sync histórico ML · 4. Fase B TikTok (repasses + conciliação) · 5. Conciliação ML · 6. Esteira do 2º ERP</p>
+  </div>
+</details>
+
+<details>
+  <summary>🗺️ Roadmap — fases da automação 360°</summary>
+  <div class="corpo">
+    <div class="fase"><div class="dot d-ok"></div><div><b>Fase 1 · Dado certo na fonte</b> — custos ML automáticos, devolução real, kits, canais <span class="badge b-ok">pronto local</span></div></div>
+    <div class="fase"><div class="dot d-now"></div><div><b>Fase 2 · Subir à nuvem</b> — PR, deploy Netlify, re-sync histórico <span class="badge b-info">segunda</span></div></div>
+    <div class="fase"><div class="dot d-fut"></div><div><b>Fase 3 · Verdade dos repasses</b> — APIs TikTok e ML, conciliação venda ↔ dinheiro na conta</div></div>
+    <div class="fase"><div class="dot d-fut"></div><div><b>Fase 4 · 2 ERPs integrados</b> — confeccao-erp na mesma esteira; produção ↔ vendas ↔ financeiro</div></div>
+    <div class="fase"><div class="dot d-fut"></div><div><b>Fase 5 · Novos canais</b> — Shein, Shopee, Amazon e e-commerce próprio plugados no mesmo motor</div></div>
+  </div>
+</details>
+
+<footer>ZEIG · painel integrado · marque os itens — o progresso fica salvo neste aparelho</footer>
+</div>
+<script>
+var todos=document.querySelectorAll('input[type=checkbox][data-k]');
+function atualiza(){
+  var t=todos.length,f=0;
+  todos.forEach(function(c){ if(c.checked) f++; });
+  document.getElementById('ptxt').textContent=f+" de "+t+" concluídos";
+  document.getElementById('pfill').style.width=(t?Math.round(100*f/t):0)+"%";
+}
+todos.forEach(function(c){
+  var k='zeig-int-'+c.dataset.k;
+  c.checked=localStorage.getItem(k)==='1';
+  c.addEventListener('change',function(){ localStorage.setItem(k,c.checked?'1':'0'); atualiza(); });
+});
+atualiza();
+</script>
+</body>
+</html>

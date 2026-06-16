@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZEIG · Guia de Kits — Alexandre</title>
+<style>
+  :root{--denim:#1e3a5f;--indigo:#27418f;--claro:#eef2fa;--ok:#1a7f4e;--alerta:#b3261e;--areia:#f7f6f2;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--areia);color:#1c1c1e;font-size:16px;line-height:1.55}
+  .wrap{max-width:640px;margin:0 auto;padding:16px 14px 60px}
+  header{background:linear-gradient(135deg,var(--denim),var(--indigo));color:#fff;border-radius:14px;padding:22px 18px;margin-bottom:18px}
+  header .marca{font-weight:800;letter-spacing:3px;font-size:13px;opacity:.85}
+  header h1{font-size:22px;margin-top:6px;line-height:1.25}
+  header p{font-size:13px;opacity:.85;margin-top:8px}
+  .card{background:#fff;border:1px solid #e4e2da;border-radius:12px;padding:16px;margin-bottom:14px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+  h2{font-size:17px;color:var(--denim);margin-bottom:10px}
+  h3{font-size:15px;margin:12px 0 6px}
+  p{margin-bottom:8px}
+  .ok{color:var(--ok);font-weight:700}
+  .ruim{color:var(--alerta);font-weight:700}
+  .sku{display:block;background:var(--claro);border:1px solid #cdd8f0;border-radius:8px;padding:10px 12px;font-family:Consolas,Menlo,monospace;font-size:15px;font-weight:700;color:var(--indigo);margin:6px 0;word-break:break-all}
+  .leitura{font-size:13px;color:#555;margin:-2px 0 10px 2px}
+  details{background:#fff;border:1px solid #e4e2da;border-radius:12px;margin-bottom:10px;overflow:hidden}
+  summary{padding:14px 16px;font-weight:700;font-size:15px;cursor:pointer;color:var(--denim);list-style:none;display:flex;justify-content:space-between;align-items:center}
+  summary::after{content:"▾";color:#999}
+  details[open] summary::after{content:"▴"}
+  details .corpo{padding:0 16px 14px}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+  th,td{padding:8px 6px;border-bottom:1px solid #eee;text-align:left;vertical-align:top}
+  th{color:#777;font-size:11px;text-transform:uppercase}
+  .badge{display:inline-block;padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700}
+  .b-ok{background:#e3f4ea;color:var(--ok)} .b-no{background:#fde9e7;color:var(--alerta)} .b-info{background:var(--claro);color:var(--indigo)}
+  .todo{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #f0efe9}
+  .todo:last-child{border-bottom:0}
+  .todo input{width:22px;height:22px;accent-color:var(--indigo);flex-shrink:0;margin-top:2px}
+  .alerta-box{background:#fff7e6;border:1px solid #ffe2a8;border-radius:10px;padding:12px;font-size:14px;margin:10px 0}
+  footer{text-align:center;font-size:12px;color:#999;margin-top:24px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="marca">ZEIG · DENIM</div>
+  <h1>Guia de Kits nos Marketplaces</h1>
+  <p>Para: <b>Alexandre</b> (anúncios) · De: Leandro · Junho/2026</p>
+</header>
+
+<div class="card">
+  <h2>✅ O que já está pronto</h2>
+  <p>O ERP (cockpit) agora <b>entende SKU de kit automaticamente</b>. Quando uma venda de kit cai do marketplace, o sistema:</p>
+  <p>1️⃣ identifica que é kit pelo SKU → 2️⃣ <b>baixa do estoque cada peça</b> do kit (na cor e tamanho certos) → 3️⃣ soma o custo das peças → 4️⃣ calcula a margem real do kit.</p>
+  <p><span class="badge b-ok">testado</span> 14 cenários automatizados, incluindo todos os que você pediu (2, 3 e 4 peças, iguais e mistos).</p>
+</div>
+
+<div class="card">
+  <h2>📐 A convenção — como montar o SKU</h2>
+
+  <h3>Kit de peças IGUAIS (mesmo modelo)</h3>
+  <span class="sku">K2-111001ZD-42</span>
+  <div class="leitura">= Kit de <b>2</b> calças ref <b>111001ZD</b> (azul) tamanho <b>42</b></div>
+  <span class="sku">K3-111002ZD-44</span>
+  <div class="leitura">= 3 calças pretas tam 44 · para 4 peças use <b>K4-</b></div>
+
+  <h3>Kit MISTO (modelos diferentes)</h3>
+  <span class="sku">K-111001ZD+111002ZD-42</span>
+  <div class="leitura">= 1 azul + 1 preta, ambas tam 42 (refs separadas por <b>+</b>, tamanho no final)</div>
+  <span class="sku">K-111001ZD+111002ZD+111003ZD+111004ZD-42</span>
+  <div class="leitura">= as 4 cores, todas tam 42 (kit de 4 peças misto)</div>
+
+  <h3>Misto com peça repetida</h3>
+  <span class="sku">K-2X111001ZD+111002ZD-42</span>
+  <div class="leitura">= <b>2</b> azuis + 1 preta, tam 42 (quantidade antes da ref com <b>X</b>)</div>
+
+  <h3>Tamanhos DIFERENTES no mesmo kit</h3>
+  <span class="sku">K-111001ZD.42+111002ZD.44</span>
+  <div class="leitura">= azul tam 42 + preta tam 44 (tamanho colado em cada ref com <b>ponto</b>)</div>
+</div>
+
+<div class="card">
+  <h2>⚠️ Regras de ouro</h2>
+  <table>
+    <tr><th>Regra</th><th>Por quê</th></tr>
+    <tr><td>Sempre <b>MAIÚSCULAS</b>, sem espaços</td><td>o sistema normaliza, mas evita erro de digitação</td></tr>
+    <tr><td>Sempre informe o <b>TAMANHO</b></td><td>o estoque é por cor <b>e</b> tamanho — sem tamanho o ERP não sabe qual peça separar</td></tr>
+    <tr><td class="ruim">NÃO usar K111001ZD2 (sem traço)</td><td>o número no fim confunde com tamanho (42? 2 peças?) — o sistema <b>rejeita de propósito</b></td></tr>
+    <tr><td>Refs do catálogo: 111001ZD a 111004ZD</td><td>azul, preta, azul escuro, azul claro</td></tr>
+  </table>
+  <div class="alerta-box">💡 <b>Por que isso importa:</b> kit mal identificado = peça errada separada = "envio incorreto" no ML = reclamação = reputação caindo (como aconteceu em maio). O SKU certo protege a conta.</div>
+</div>
+
+<div class="card">
+  <h2>📋 O que VOCÊ precisa fazer</h2>
+  <div class="todo"><input type="checkbox" data-k="ax1"><div>Criar <b>1 anúncio de teste</b> com kit homogêneo (ex.: <b>K2-111001ZD-42</b>)</div></div>
+  <div class="todo"><input type="checkbox" data-k="ax2"><div>Criar <b>1 anúncio de teste</b> com kit misto (ex.: <b>K-111001ZD+111002ZD-42</b>)</div></div>
+  <div class="todo"><input type="checkbox" data-k="ax3"><div>Avisar o Leandro → ele valida no ambiente de teste se o ERP explodiu o kit certinho</div></div>
+  <div class="todo"><input type="checkbox" data-k="ax4"><div>Validado → cadastrar os demais kits (2, 3 e 4 peças) com a convenção</div></div>
+  <div class="todo"><input type="checkbox" data-k="ax5"><div>Usar a MESMA convenção nos canais novos (Shein, Shopee, Amazon) quando ativarem</div></div>
+</div>
+
+<details>
+  <summary>🔭 Próximos passos (contexto geral)</summary>
+  <div class="corpo">
+    <p>• O sistema detecta sozinho os canais novos (Shein/Shopee/Amazon) na primeira venda — seus kits já nascem compatíveis.</p>
+    <p>• Fase B: integração direta com TikTok/ML vai trazer comissão e frete reais por venda — a margem de cada kit ficará exata, automática.</p>
+    <p>• Dúvida sobre um SKU específico? Manda pro Leandro que ele testa na hora.</p>
+  </div>
+</details>
+
+<footer>ZEIG · documento gerado pela equipe de automação · seu progresso fica salvo neste aparelho</footer>
+</div>
+<script>
+document.querySelectorAll('input[type=checkbox][data-k]').forEach(function(c){
+  var k='zeig-alex-'+c.dataset.k;
+  c.checked=localStorage.getItem(k)==='1';
+  c.addEventListener('change',function(){ localStorage.setItem(k,c.checked?'1':'0'); });
+});
+</script>
+</body>
+</html>

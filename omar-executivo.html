@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZEIG · Relatório Executivo — Omar</title>
+<style>
+  :root{--denim:#1e3a5f;--indigo:#27418f;--claro:#eef2fa;--ok:#1a7f4e;--alerta:#b3261e;--areia:#f7f6f2;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--areia);color:#1c1c1e;font-size:16px;line-height:1.55}
+  .wrap{max-width:640px;margin:0 auto;padding:16px 14px 60px}
+  header{background:linear-gradient(135deg,var(--denim),var(--indigo));color:#fff;border-radius:14px;padding:22px 18px;margin-bottom:18px}
+  header .marca{font-weight:800;letter-spacing:3px;font-size:13px;opacity:.85}
+  header h1{font-size:22px;margin-top:6px;line-height:1.25}
+  header p{font-size:13px;opacity:.85;margin-top:8px}
+  .kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+  .kpi{background:#fff;border:1px solid #e4e2da;border-radius:12px;padding:14px;text-align:center}
+  .kpi .v{font-size:22px;font-weight:800;color:var(--indigo)}
+  .kpi .l{font-size:11px;color:#777;text-transform:uppercase;margin-top:4px}
+  .card{background:#fff;border:1px solid #e4e2da;border-radius:12px;padding:16px;margin-bottom:14px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+  h2{font-size:17px;color:var(--denim);margin-bottom:10px}
+  p{margin-bottom:8px}
+  .ok{color:var(--ok);font-weight:700} .ruim{color:var(--alerta);font-weight:700}
+  details{background:#fff;border:1px solid #e4e2da;border-radius:12px;margin-bottom:10px;overflow:hidden}
+  summary{padding:14px 16px;font-weight:700;font-size:15px;cursor:pointer;color:var(--denim);list-style:none;display:flex;justify-content:space-between;align-items:center}
+  summary::after{content:"▾";color:#999} details[open] summary::after{content:"▴"}
+  details .corpo{padding:0 16px 14px}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+  th,td{padding:8px 6px;border-bottom:1px solid #eee;text-align:left;vertical-align:top}
+  th{color:#777;font-size:11px;text-transform:uppercase}
+  td.num{text-align:right;font-weight:700;white-space:nowrap}
+  .badge{display:inline-block;padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700}
+  .b-ok{background:#e3f4ea;color:var(--ok)} .b-no{background:#fde9e7;color:var(--alerta)} .b-info{background:var(--claro);color:var(--indigo)}
+  .todo{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #f0efe9}
+  .todo:last-child{border-bottom:0}
+  .todo input{width:22px;height:22px;accent-color:var(--indigo);flex-shrink:0;margin-top:2px}
+  .alerta-box{background:#fff7e6;border:1px solid #ffe2a8;border-radius:10px;padding:12px;font-size:14px;margin:10px 0}
+  footer{text-align:center;font-size:12px;color:#999;margin-top:24px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="marca">ZEIG · DENIM</div>
+  <h1>Automação Financeira do Cockpit — Relatório Executivo</h1>
+  <p>Para: <b>Omar</b> · De: Leandro · Junho/2026</p>
+</header>
+
+<div class="kpis">
+  <div class="kpi"><div class="v">7</div><div class="l">entregas prontas</div></div>
+  <div class="kpi"><div class="v">37</div><div class="l">testes automatizados</div></div>
+  <div class="kpi"><div class="v">R$ 26,44</div><div class="l">custo oculto achado em 1 venda</div></div>
+  <div class="kpi"><div class="v">−R$ 11</div><div class="l">devolução agora bate c/ o ML</div></div>
+</div>
+
+<div class="card">
+  <h2>🎯 Resumo em 30 segundos</h2>
+  <p><b>Achamos e corrigimos a raiz do problema financeiro.</b> O Bling já enviava comissão e frete do Mercado Livre — o cockpit é que descartava esses campos. E a "inconsistência sem lógica" das devoluções era um estorno fantasma: o sistema lançava um pagamento ao cliente que nunca existe em marketplace (o ML compensa tudo no repasse).</p>
+  <p>Tudo corrigido, <b>testado contra vendas reais da Zeig</b>, rodando em ambiente de teste isolado na máquina do Leandro. <span class="badge b-info">nada foi alterado em produção</span> — entra só com a sua revisão e aprovação.</p>
+</div>
+
+<details open>
+  <summary>💰 Correção 1 — Custos do ML entram sozinhos</summary>
+  <div class="corpo">
+    <p>Validação com vendas reais (o que o sistema IGNORAVA e agora captura automático):</p>
+    <table>
+      <tr><th>Pedido</th><th>Total</th><th>Antes</th><th>Agora</th></tr>
+      <tr><td>46 (ML)</td><td class="num">65,90</td><td class="num ruim">R$ 0</td><td class="num ok">26,44</td></tr>
+      <tr><td>45 (ML)</td><td class="num">113,81</td><td class="num ruim">R$ 0</td><td class="num ok">22,76</td></tr>
+      <tr><td>44 (ML)</td><td class="num">65,90</td><td class="num ruim">R$ 0</td><td class="num ok">26,44</td></tr>
+    </table>
+    <p>No pedido 46, <b>40% da receita</b> em custos não aparecia — a margem mostrada era irreal. Fim da digitação venda a venda no ML.</p>
+    <p><span class="badge b-no">atenção</span> TikTok: o Bling devolve zerado (confirmado no pedido 43). Solução definitiva = API direta do TikTok (Fase B). Até lá, regra de custo estimada (8%) cobre o vazio, marcada como [auto].</p>
+  </div>
+</details>
+
+<details>
+  <summary>↩️ Correção 2 — A devolução "sem lógica" (caso real)</summary>
+  <div class="corpo">
+    <p>Venda <b>#2000013245772489</b> (Osana, calça azul claro 48, R$ 64,90):</p>
+    <table>
+      <tr><td>Venda</td><td class="num">+64,90</td></tr>
+      <tr><td>Tarifas ML (19% + fixo)</td><td class="num">−20,08</td></tr>
+      <tr><td>Devolução: produto cancelado</td><td class="num">−64,90</td></tr>
+      <tr><td>Devolução: ML estorna tarifas</td><td class="num">+20,08</td></tr>
+      <tr><td>Tarifa de devolução</td><td class="num">−11,00</td></tr>
+      <tr><td><b>Resultado final</b></td><td class="num ruim"><b>−11,00</b></td></tr>
+    </table>
+    <p>O sistema sugeria "estorno ao cliente R$ 64,90 a pagar" — dinheiro que você nunca paga (o ML retém e devolve direto). Isso dobrava o prejuízo no papel.</p>
+    <p><span class="badge b-ok">corrigido</span> Novo modo MARKETPLACE: cancela os lançamentos da venda, lança só a tarifa de devolução. A venda da Osana fecha em <b>−R$ 11,00, idêntico ao extrato do ML</b>. Devolução de venda direta segue no modelo antigo (que pra ela é o certo).</p>
+  </div>
+</details>
+
+<details>
+  <summary>📡 Correção 3 — Pronto para Shein, Shopee e Amazon</summary>
+  <div class="corpo">
+    <p>• Canal identificado pelo <b>CNPJ do intermediador</b> (mais confiável que nome de loja). ML e TikTok já registrados com CNPJs reais validados.</p>
+    <p>• <b>Canal novo = detecção automática:</b> na primeira venda da Shein/Shopee/Amazon, aparece "novo canal detectado" e se registra na tela — sem mexer em código.</p>
+    <p>• <b>Regras de custo por canal</b> (editáveis na tela): embalagem R$ 0,35/pedido, mão de obra R$ 1,50/pedido, comissão estimada para canal sem dado. Regra só preenche o que a fonte não traz — dado real sempre tem prioridade.</p>
+    <p>• Novo painel <b>"📡 Canais"</b>: vendas/receita 30d por canal + "% de custo preenchido" (saúde do dado) + edição das regras.</p>
+    <p>• <b>Kits do Alexandre:</b> convenção de SKU fechada e implementada — o ERP explode o kit em peças, baixa estoque e custeia sozinho (guia próprio enviado a ele).</p>
+  </div>
+</details>
+
+<details>
+  <summary>🔗 Integração financeira ↔ recebimentos (seu pedido)</summary>
+  <div class="corpo">
+    <p>Desenho aprovado em 4 camadas:</p>
+    <p>1️⃣ <b>Bling</b> traz → usa o real (ML: funcionando)<br>
+       2️⃣ <b>Regra do canal</b> → preenche o que falta (já no ar)<br>
+       3️⃣ <b>API direta do marketplace</b> → repasses reais TikTok/ML (Fase B)<br>
+       4️⃣ <b>Conciliação</b> → cada venda casada com o dinheiro que CAIU na conta</p>
+    <p>A Fase B começa pelo TikTok (onde o furo é maior) e replica no ML.</p>
+  </div>
+</details>
+
+<div class="card">
+  <h2>📋 O que precisamos de VOCÊ (segunda)</h2>
+  <div class="todo"><input type="checkbox" data-k="om1"><div><b>Revisar o Pull Request</b> no GitHub (dev-local → master): você vê linha a linha o que mudou e aprova — nada entra sem o seu OK</div></div>
+  <div class="todo"><input type="checkbox" data-k="om2"><div><b>Decidir a publicação no Netlify</b> (está a 75% da cota): ligar deploy automático do GitHub ou seguir manual — o fix do ML já está no GitHub esperando</div></div>
+  <div class="todo"><input type="checkbox" data-k="om3"><div><b>Criar o app de API do TikTok Shop</b> no Partner Center (App Key/Secret) — destrava a Fase B. ⚠️ NÃO é o login/senha do portal</div></div>
+  <div class="todo"><input type="checkbox" data-k="om4"><div><b>Trocar a senha do TikTok</b> (circulou em chat — higiene de segurança)</div></div>
+  <div class="todo"><input type="checkbox" data-k="om5"><div>Informar <b>onde mora o código do confeccao-erp</b> (repo/hospedagem) para aplicarmos a mesma esteira segura nos 2 ERPs</div></div>
+  <div class="todo"><input type="checkbox" data-k="om6"><div>Opcional: <b>"Solicitar revisão"</b> da reclamação no ML (tela de reputação) — pode limpar o índice</div></div>
+</div>
+
+<details>
+  <summary>🗺️ Roadmap (depois da sua aprovação)</summary>
+  <div class="corpo">
+    <p>1. Transportadora por venda (Amaral Flex titular · J3 backup · Mercado Envios) — custo de frete por parceiro<br>
+    2. Re-sincronizar vendas antigas do ML (histórico ficou com custo zerado)<br>
+    3. Fase B TikTok: repasses reais + conciliação com recebimentos<br>
+    4. Conciliação ML por repasse<br>
+    5. Integração dos 2 ERPs na mesma esteira de versão/deploy<br>
+    6. Shein/Shopee/Amazon: registrar e configurar conforme ativarem</p>
+  </div>
+</details>
+
+<div class="alerta-box">🔒 <b>Segurança do seu trabalho:</b> tudo foi feito em linha do tempo separada (branch). Seu commit das devoluções foi preservado e nosso trabalho foi empilhado por cima, sem conflito. Nada sobrescreve nada sem revisão.</div>
+
+<footer>ZEIG · documento gerado pela equipe de automação · seu progresso fica salvo neste aparelho</footer>
+</div>
+<script>
+document.querySelectorAll('input[type=checkbox][data-k]').forEach(function(c){
+  var k='zeig-omar-'+c.dataset.k;
+  c.checked=localStorage.getItem(k)==='1';
+  c.addEventListener('change',function(){ localStorage.setItem(k,c.checked?'1':'0'); });
+});
+</script>
+</body>
+</html>

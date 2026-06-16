@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZEIG · Manual do Orquestrador — Leandro</title>
+<style>
+  :root{--denim:#1e3a5f;--indigo:#27418f;--claro:#eef2fa;--ok:#1a7f4e;--alerta:#b3261e;--areia:#f7f6f2;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--areia);color:#1c1c1e;font-size:16px;line-height:1.55}
+  .wrap{max-width:640px;margin:0 auto;padding:16px 14px 60px}
+  header{background:linear-gradient(135deg,var(--denim),var(--indigo));color:#fff;border-radius:14px;padding:22px 18px;margin-bottom:18px}
+  header .marca{font-weight:800;letter-spacing:3px;font-size:13px;opacity:.85}
+  header h1{font-size:22px;margin-top:6px;line-height:1.25}
+  header p{font-size:13px;opacity:.85;margin-top:8px}
+  .card{background:#fff;border:1px solid #e4e2da;border-radius:12px;padding:16px;margin-bottom:14px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+  h2{font-size:17px;color:var(--denim);margin-bottom:10px}
+  h3{font-size:14px;margin:12px 0 6px;color:var(--indigo)}
+  p{margin-bottom:8px}
+  .ok{color:var(--ok);font-weight:700} .ruim{color:var(--alerta);font-weight:700}
+  code,.mono{font-family:Consolas,Menlo,monospace;background:var(--claro);padding:2px 7px;border-radius:6px;font-size:13px;color:var(--indigo);word-break:break-all}
+  details{background:#fff;border:1px solid #e4e2da;border-radius:12px;margin-bottom:10px;overflow:hidden}
+  summary{padding:14px 16px;font-weight:700;font-size:15px;cursor:pointer;color:var(--denim);list-style:none;display:flex;justify-content:space-between;align-items:center}
+  summary::after{content:"▾";color:#999} details[open] summary::after{content:"▴"}
+  details .corpo{padding:0 16px 14px}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0}
+  th,td{padding:8px 6px;border-bottom:1px solid #eee;text-align:left;vertical-align:top}
+  th{color:#777;font-size:11px;text-transform:uppercase}
+  .badge{display:inline-block;padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700}
+  .b-ok{background:#e3f4ea;color:var(--ok)} .b-no{background:#fde9e7;color:var(--alerta)} .b-info{background:var(--claro);color:var(--indigo)}
+  .passo{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #f0efe9}
+  .passo:last-child{border-bottom:0}
+  .passo .n{width:28px;height:28px;border-radius:99px;background:var(--indigo);color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .todo{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #f0efe9}
+  .todo:last-child{border-bottom:0}
+  .todo input{width:22px;height:22px;accent-color:var(--indigo);flex-shrink:0;margin-top:2px}
+  .alerta-box{background:#fff7e6;border:1px solid #ffe2a8;border-radius:10px;padding:12px;font-size:14px;margin:10px 0}
+  footer{text-align:center;font-size:12px;color:#999;margin-top:24px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="marca">ZEIG · DENIM</div>
+  <h1>Manual do Orquestrador da IA</h1>
+  <p>Para: <b>Leandro</b> · a jornada completa, local → nuvem · Junho/2026</p>
+</header>
+
+<div class="card">
+  <h2>🧭 O mapa do território</h2>
+  <table>
+    <tr><th>Sistema</th><th>O que é</th><th>Onde mora</th></tr>
+    <tr><td><b>Cockpit</b> (bling-cockpit)</td><td>ERP executivo: vendas, estoque, financeiro, conectado ao Bling</td><td>Nuvem (Netlify) + cópia local na sua máquina</td></tr>
+    <tr><td><b>confeccao-erp</b></td><td>ERP de produção (fábrica)</td><td>❓ descobrir com Omar (repo/host)</td></tr>
+    <tr><td><b>Banco</b> (Firebase)</td><td>Dados dos DOIS ERPs (projeto confeccao-erp)</td><td>Nuvem Google + <b>emulador local</b> p/ testes</td></tr>
+    <tr><td><b>Bling</b></td><td>Hub: pedidos, estoque, NF-e dos marketplaces</td><td>SaaS, via API v3 (OAuth)</td></tr>
+  </table>
+</div>
+
+<details open>
+  <summary>📜 PASSO A PASSO — o que fizemos no LOCAL</summary>
+  <div class="corpo">
+    <div class="passo"><div class="n">1</div><div><b>Clonamos o código</b> do GitHub (OmarkMZeig/bling-cockpit) e mapeamos a arquitetura: SPA + Firestore + Netlify Functions (OAuth Bling).</div></div>
+    <div class="passo"><div class="n">2</div><div><b>Diagnóstico com dados reais:</b> via console do copilot conectado, puxamos pedidos reais do Bling. Descoberta: ML manda comissão/frete (<span class="mono">taxas.taxaComissao</span>, <span class="mono">transporte.frete</span>) e o código descartava; TikTok vem zerado do Bling.</div></div>
+    <div class="passo"><div class="n">3</div><div><b>Fix ML</b> aplicado e validado contra pedidos 44/45/46 (R$ 75,64 recuperados) → commit no GitHub master. Netlify não publicou (auto-deploy desligado + cota 75%) → decisão: <b>local-first</b>.</div></div>
+    <div class="passo"><div class="n">4</div><div><b>Sandbox seguro:</b> Emulador do Firebase (banco+login 100% locais), chave que só liga em localhost — produção fisicamente intocável. Atalho <span class="mono">TBT - Sistema Local</span> no desktop; usuário <span class="mono">dev@local.test / dev123456</span>.</div></div>
+    <div class="passo"><div class="n">5</div><div><b>Seed com 1 clique</b> (<span class="mono">localhost:8081/seed-dev.html</span>): catálogo Zeig (4 refs × 6 tamanhos), estoque, vendas reais (inclusive a da devolução da Osana), pedido TikTok e KIT-DEMO.</div></div>
+    <div class="passo"><div class="n">6</div><div><b>Kits por SKU</b> (demanda Alexandre): parser K2-REF-TAM / K-REF+REF-TAM etc., explode em componentes com estoque e custo. 14 testes.</div></div>
+    <div class="passo"><div class="n">7</div><div><b>Canais por CNPJ</b> + detecção automática de canal novo (Shein/Shopee/Amazon prontos) + <b>regras de custo por canal</b> (embalagem 0,35 · logística 1,50 · TikTok 8% est. · tarifa devolução ML 11). 11 testes.</div></div>
+    <div class="passo"><div class="n">8</div><div><b>Devolução modo MARKETPLACE:</b> fim do estorno fantasma; caso Osana fecha <b>−R$ 11,00 = extrato ML</b>. Cancela/restaura lançamentos da venda automaticamente. 12 testes.</div></div>
+    <div class="passo"><div class="n">9</div><div><b>Painel 📡 Canais</b> no menu Mais: saúde do dado por canal + regras editáveis na tela.</div></div>
+  </div>
+</details>
+
+<details>
+  <summary>🖥️ COMO OPERAR o ambiente local (cola rápida)</summary>
+  <div class="corpo">
+    <h3>Subir</h3>
+    <p>2 cliques no ícone <b>TBT - Sistema Local</b> (desktop) → 2 janelas pretas abrem (NÃO fechar) → navegador abre em <span class="mono">localhost:8081</span> → login <span class="mono">dev@local.test / dev123456</span>.</p>
+    <h3>Endereços</h3>
+    <p>App: <span class="mono">localhost:8081</span> · Painel do banco local: <span class="mono">127.0.0.1:4001</span> · Seed: <span class="mono">localhost:8081/seed-dev.html</span></p>
+    <h3>Roteiro de teste (6 checagens)</h3>
+    <p>① Vendas → pedido 46: comissão 15,44 + frete 11 preenchidos · ② KIT-DEMO: vínculos explodidos · ③ Devoluções → criar da venda 2000013245772489 → modo marketplace automático, líquido −11 · ④ Financeiro: lançamentos da venda cancelados · ⑤ Menu Mais → Canais · ⑥ Pedido 43 TikTok: gap visível.</p>
+    <h3>Zerar o sandbox</h3>
+    <p>Fechar as janelas → apagar a pasta <span class="mono">firebase-emulator-data</span> → subir de novo → rodar o seed.</p>
+  </div>
+</details>
+
+<details>
+  <summary>☁️ PASSO A PASSO — o que faremos na NUVEM</summary>
+  <div class="corpo">
+    <div class="passo"><div class="n">1</div><div><b>Pull Request</b> dev-local → master: Omar revisa linha a linha no GitHub e aprova (nada entra sem ele).</div></div>
+    <div class="passo"><div class="n">2</div><div><b>Publicar no Netlify:</b> ligar auto-deploy do GitHub (recomendado; site estático gasta quase nada) ou deploy manual do Omar. A chave do emulador garante: na nuvem, banco real; dados de teste NÃO sobem.</div></div>
+    <div class="passo"><div class="n">3</div><div><b>Re-sincronizar histórico ML:</b> script recalcula comissão/frete das vendas antigas (importadas pela lógica velha).</div></div>
+    <div class="passo"><div class="n">4</div><div><b>Fase B — TikTok:</b> app no Partner Center (App Key/Secret em <span class="mono">tiktok-credentials.json</span>, fora do git) → conector de repasses (Finance API) → comissão/frete REAIS por venda + conciliação com recebimentos.</div></div>
+    <div class="passo"><div class="n">5</div><div><b>Conciliação ML</b> por repasse (mesma esteira, valida o dado do Bling contra o dinheiro que caiu).</div></div>
+    <div class="passo"><div class="n">6</div><div><b>Integrar o 2º ERP (confeccao-erp):</b> localizar repo/hosting com Omar → mesma esteira (branch → PR → deploy) → eventos produção↔cockpit já existem (ErpBridge), formalizar o fluxo.</div></div>
+    <div class="passo"><div class="n">7</div><div><b>Canais novos:</b> Shein/Shopee/Amazon ativam → registrar canal na tela (detecção automática) → configurar regras de custo → kits do Alexandre já compatíveis.</div></div>
+  </div>
+</details>
+
+<details>
+  <summary>🔒 Regras de segurança da operação</summary>
+  <div class="corpo">
+    <p>• <b>Senha NUNCA em chat</b> — credenciais vão em arquivos locais fora do git (ex.: tiktok-credentials.json). A senha do TikTok que circulou: trocar.</p>
+    <p>• <b>Git protege o Omar:</b> trabalhamos em branch separada; PR para revisão; nunca <span class="mono">push --force</span>. O commit de devoluções dele foi preservado e empilhamos por cima.</p>
+    <p>• <b>Produção intocável em teste:</b> emulador só em localhost; deploy leva código, não dados.</p>
+    <p>• <b>Toda mudança com teste:</b> 37 testes automatizados hoje (kits 14 · canais 11 · devolução-mkt 12).</p>
+  </div>
+</details>
+
+<div class="card">
+  <h2>📋 Seus to-dos (orquestrador)</h2>
+  <div class="todo"><input type="checkbox" data-k="le1"><div>Rodar o <b>roteiro de 6 checagens</b> no sandbox (acima)</div></div>
+  <div class="todo"><input type="checkbox" data-k="le2"><div>Enviar os HTMLs: <b>alexandre-kits</b> ao Alexandre e <b>omar-executivo</b> ao Omar (WhatsApp)</div></div>
+  <div class="todo"><input type="checkbox" data-k="le3"><div>Cobrar Alexandre: 2 anúncios de teste com a convenção K-</div></div>
+  <div class="todo"><input type="checkbox" data-k="le4"><div>Segunda c/ Omar: PR + deploy Netlify + App Key TikTok + onde mora o confeccao-erp</div></div>
+  <div class="todo"><input type="checkbox" data-k="le5"><div>Garantir a troca da senha do TikTok</div></div>
+  <div class="todo"><input type="checkbox" data-k="le6"><div>Manter o <b>CHECKLIST-ENTREGAS.txt</b> (desktop) atualizado a cada validação</div></div>
+</div>
+
+<div class="alerta-box">🤖 <b>Como me acionar:</b> as próximas frentes na fila são (1) transportadora por venda (Amaral Flex/J3/Mercado Envios), (2) abrir o PR, (3) Fase B TikTok quando as chaves chegarem. É só dizer "segue" no chat.</div>
+
+<footer>ZEIG · documento gerado pela equipe de automação · seu progresso fica salvo neste aparelho</footer>
+</div>
+<script>
+document.querySelectorAll('input[type=checkbox][data-k]').forEach(function(c){
+  var k='zeig-lea-'+c.dataset.k;
+  c.checked=localStorage.getItem(k)==='1';
+  c.addEventListener('change',function(){ localStorage.setItem(k,c.checked?'1':'0'); });
+});
+</script>
+</body>
+</html>
