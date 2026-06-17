@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZEIG · Sua parte para o Go — Omar</title>
+<style>
+  :root{--denim:#1e3a5f;--indigo:#27418f;--claro:#eef2fa;--ok:#1a7f4e;--alerta:#b3261e;--areia:#f7f6f2;--amar:#b26a00}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--areia);color:#1c1c1e;font-size:16px;line-height:1.55}
+  .wrap{max-width:640px;margin:0 auto;padding:16px 14px 50px}
+  header{background:linear-gradient(135deg,var(--denim),var(--indigo));color:#fff;border-radius:14px;padding:22px 18px;margin-bottom:16px}
+  header .marca{font-weight:800;letter-spacing:3px;font-size:13px;opacity:.85}
+  header h1{font-size:21px;margin-top:6px}header p{font-size:13px;opacity:.85;margin-top:8px}
+  .card{background:#fff;border:1px solid #e4e2da;border-radius:12px;padding:16px;margin-bottom:14px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+  h2{font-size:17px;color:var(--denim);margin-bottom:10px}
+  p{margin-bottom:8px}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0}
+  th,td{padding:8px 6px;border-bottom:1px solid #eee;text-align:left;vertical-align:top}
+  th{color:#777;font-size:11px;text-transform:uppercase}
+  .badge{display:inline-block;padding:3px 9px;border-radius:99px;font-size:11px;font-weight:700;white-space:nowrap}
+  .b-go{background:#e3f4ea;color:var(--ok)} .b-no{background:#fde9e7;color:var(--alerta)} .b-dep{background:#fff7e6;color:var(--amar)}
+  .todo{display:flex;gap:10px;align-items:flex-start;padding:11px 0;border-bottom:1px solid #f0efe9}
+  .todo:last-child{border-bottom:0}.todo input{width:22px;height:22px;accent-color:var(--indigo);flex-shrink:0;margin-top:2px}
+  .todo .pz{font-size:11px;color:var(--alerta);font-weight:700;margin-top:3px}
+  .win{border-left:4px solid var(--ok);background:#f1faf4;padding:10px 12px;border-radius:8px;margin:8px 0;font-size:14px}
+  .prog{background:#fff;border:1px solid #e4e2da;border-radius:12px;padding:13px 16px;margin-bottom:14px}
+  .prog .barra{height:9px;background:#e8e6df;border-radius:99px;overflow:hidden;margin-top:7px}
+  .prog .fill{height:100%;background:linear-gradient(90deg,var(--indigo),var(--ok));width:0%;transition:width .4s}
+  footer{text-align:center;font-size:12px;color:#999;margin-top:22px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="marca">ZEIG · DENIM</div>
+  <h1>Sua parte para liberar o Go 🟢</h1>
+  <p>Para: <b>Omar</b> · o que só você destrava · Junho/2026</p>
+</header>
+
+<div class="prog">
+  <div style="font-size:13px"><b>Seu checklist</b> · <span id="ptxt">0 de 0</span></div>
+  <div class="barra"><div class="fill" id="pfill"></div></div>
+</div>
+
+<div class="card">
+  <h2>🎯 A proposta, em 1 minuto</h2>
+  <p>O sistema novo (custos reais por venda, devolução certa, kits, pronto pra Shopee) está <b>testado</b> numa cópia de teste — sua produção não foi tocada.</p>
+  <p>Em vez de subir tudo de uma vez no dia 20 (apertado, e tem o jogo do Brasil na sexta), proponho <b>faseado e seguro</b>:</p>
+  <table>
+    <tr><th>Quando</th><th>O quê</th></tr>
+    <tr><td><b>Sáb 20/06</b></td><td>Eu te mostro rodando com <b>seus 67 pedidos reais</b> validados (checkpoint, sem mexer na produção)</td></tr>
+    <tr><td><b>Sáb 27/06</b></td><td>Sobe em produção, com <b>backup e botão de voltar atrás</b> prontos</td></tr>
+    <tr><td>Julho</td><td>Automação total + 2º ERP (com calma e teste)</td></tr>
+  </table>
+  <div class="win">Você vê valor já no dia 20, e a gente sobe sem risco de travar sua operação. Release pequeno = risco pequeno.</div>
+</div>
+
+<div class="card">
+  <h2>🔑 O que só você libera (antes do dia 20)</h2>
+  <p>Pegar acesso no dia do deploy = a gente descobre problema na sua frente. Com acesso antes, a gente <b>testa e garante</b>:</p>
+  <div class="todo"><input type="checkbox" data-k="o1"><div>Acesso ao <b>código do 2º ERP</b> (produção/fábrica) — sem ele, esse ERP fica de fora do deploy<div class="pz">crítico · até quarta</div></div></div>
+  <div class="todo"><input type="checkbox" data-k="o2"><div>Acesso ao <b>painel Netlify</b> (ver o uso real dos 75% + preparar o rollback)<div class="pz">até quarta</div></div></div>
+  <div class="todo"><input type="checkbox" data-k="o3"><div>Criar o <b>app de API do TikTok Shop</b> (Partner Center → App Key/Secret) — é o que liga a automação do TikTok. ⚠️ NÃO é o login/senha do portal<div class="pz">pode ser p/ julho</div></div></div>
+  <div class="todo"><input type="checkbox" data-k="o4"><div>Confirmar acesso ao <b>Bling</b> e ao <b>banco de produção</b> (p/ backup e validar os 67 pedidos)<div class="pz">até quinta</div></div></div>
+</div>
+
+<div class="card">
+  <h2>✅ Decisões que dependem de você</h2>
+  <div class="todo"><input type="checkbox" data-k="o5"><div><b>Aprovar a data faseada</b> (20 = checkpoint, 27 = deploy) ou definir outra</div></div>
+  <div class="todo"><input type="checkbox" data-k="o6"><div><b>Contas a pagar/receber por marketplace:</b> ok gerar automático <b>marcado como "a revisar"</b> (você confere antes de dar baixa)? <span class="badge b-go">risco baixo assim</span></div></div>
+  <div class="todo"><input type="checkbox" data-k="o7"><div><b>Trocar a senha do TikTok</b> (circulou em conversa — higiene de segurança)</div></div>
+  <div class="todo"><input type="checkbox" data-k="o8"><div><b>Validar comigo no dia 20</b> os 67 pedidos (conferir se os custos batem com o que você vê nos marketplaces)</div></div>
+  <div class="todo"><input type="checkbox" data-k="o9"><div><b>Dar o Go final</b> na sexta 26 à noite — só sobe se tudo estiver testado</div></div>
+</div>
+
+<div class="win" style="margin:14px 0">🛡️ <b>Garantia:</b> nada entra na sua produção sem você revisar e aprovar. Backup antes, e rollback (voltar atrás) em 1 clique se precisar.</div>
+
+<footer>ZEIG · sua parte para o Go · marque os itens · progresso salvo no aparelho</footer>
+</div>
+<script>
+var t=document.querySelectorAll('input[type=checkbox][data-k]');
+function up(){var n=t.length,f=0;t.forEach(c=>{if(c.checked)f++;});document.getElementById('ptxt').textContent=f+" de "+n;document.getElementById('pfill').style.width=(n?Math.round(100*f/n):0)+"%";}
+t.forEach(c=>{var k='zeig-ogo-'+c.dataset.k;c.checked=localStorage.getItem(k)==='1';c.addEventListener('change',()=>{localStorage.setItem(k,c.checked?'1':'0');up();});});up();
+</script>
+</body>
+</html>

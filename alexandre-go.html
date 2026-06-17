@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZEIG · Sua parte para o Go — Alexandre</title>
+<style>
+  :root{--denim:#1e3a5f;--indigo:#27418f;--claro:#eef2fa;--ok:#1a7f4e;--alerta:#b3261e;--areia:#f7f6f2}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--areia);color:#1c1c1e;font-size:16px;line-height:1.55}
+  .wrap{max-width:640px;margin:0 auto;padding:16px 14px 50px}
+  header{background:linear-gradient(135deg,var(--denim),var(--indigo));color:#fff;border-radius:14px;padding:22px 18px;margin-bottom:16px}
+  header .marca{font-weight:800;letter-spacing:3px;font-size:13px;opacity:.85}
+  header h1{font-size:21px;margin-top:6px}header p{font-size:13px;opacity:.85;margin-top:8px}
+  .card{background:#fff;border:1px solid #e4e2da;border-radius:12px;padding:16px;margin-bottom:14px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+  h2{font-size:17px;color:var(--denim);margin-bottom:10px}
+  p{margin-bottom:8px}
+  .sku{display:block;background:var(--claro);border:1px solid #cdd8f0;border-radius:8px;padding:9px 12px;font-family:Consolas,monospace;font-size:15px;font-weight:700;color:var(--indigo);margin:6px 0;word-break:break-all}
+  .leitura{font-size:12.5px;color:#555;margin:-2px 0 10px 2px}
+  .todo{display:flex;gap:10px;align-items:flex-start;padding:11px 0;border-bottom:1px solid #f0efe9}
+  .todo:last-child{border-bottom:0}.todo input{width:22px;height:22px;accent-color:var(--indigo);flex-shrink:0;margin-top:2px}
+  .win{border-left:4px solid var(--ok);background:#f1faf4;padding:10px 12px;border-radius:8px;margin:8px 0;font-size:14px}
+  .ruim{color:var(--alerta);font-weight:700}
+  .prog{background:#fff;border:1px solid #e4e2da;border-radius:12px;padding:13px 16px;margin-bottom:14px}
+  .prog .barra{height:9px;background:#e8e6df;border-radius:99px;overflow:hidden;margin-top:7px}
+  .prog .fill{height:100%;background:linear-gradient(90deg,var(--indigo),var(--ok));width:0%;transition:width .4s}
+  footer{text-align:center;font-size:12px;color:#999;margin-top:22px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="marca">ZEIG · DENIM</div>
+  <h1>Sua parte para o Go 🟢</h1>
+  <p>Para: <b>Alexandre</b> · kits e anúncios · Junho/2026</p>
+</header>
+
+<div class="prog">
+  <div style="font-size:13px"><b>Seu checklist</b> · <span id="ptxt">0 de 0</span></div>
+  <div class="barra"><div class="fill" id="pfill"></div></div>
+</div>
+
+<div class="card">
+  <h2>✅ O que já está pronto pra você</h2>
+  <p>O ERP agora <b>entende kit automaticamente</b>. Quando um anúncio de kit vende, o sistema baixa do estoque cada peça (na cor e tamanho certos) e calcula o custo. Você só precisa <b>nomear o SKU no padrão</b> — o resto é automático.</p>
+  <div class="win">Vale para todos os marketplaces (Mercado Livre, TikTok, e a Shopee que está entrando).</div>
+</div>
+
+<div class="card">
+  <h2>📐 O padrão de SKU (cola rápida)</h2>
+  <span class="sku">K2-111001ZD-42</span>
+  <div class="leitura">2 peças iguais · ref · tamanho (use K3- / K4- pra 3 e 4)</div>
+  <span class="sku">K-111001ZD+111002ZD-42</span>
+  <div class="leitura">kit misto (cores diferentes), tamanho no final</div>
+  <span class="sku">K-2X111001ZD+111002ZD-42</span>
+  <div class="leitura">2 da primeira + 1 da segunda</div>
+  <span class="sku">K-111001ZD.42+111002ZD.44</span>
+  <div class="leitura">tamanhos diferentes na mesma combinação</div>
+  <p style="margin-top:10px">Regras: <b>MAIÚSCULAS</b>, sem espaços, <b>sempre o tamanho</b>. <span class="ruim">Não usar K111001ZD2</span> (sem traço) — confunde com tamanho e o sistema rejeita.</p>
+</div>
+
+<div class="card">
+  <h2>📋 O que preciso de você para o Go</h2>
+  <div class="todo"><input type="checkbox" data-k="a1"><div>Criar <b>1 anúncio de teste</b> com kit igual (ex.: <b>K2-111001ZD-42</b>)</div></div>
+  <div class="todo"><input type="checkbox" data-k="a2"><div>Criar <b>1 anúncio de teste</b> com kit misto (ex.: <b>K-111001ZD+111002ZD-42</b>)</div></div>
+  <div class="todo"><input type="checkbox" data-k="a3"><div><b>Me avisar (Leandro)</b> → eu valido no sistema se o kit explodiu certo no estoque</div></div>
+  <div class="todo"><input type="checkbox" data-k="a4"><div>Confirmar como foram <b>os testes que você já fez direto</b> (apareceram no ERP do Omar? bateu?)</div></div>
+  <div class="todo"><input type="checkbox" data-k="a5"><div>Validado → cadastrar os kits reais (2, 3 e 4 peças) com o padrão</div></div>
+  <div class="todo"><input type="checkbox" data-k="a6"><div>Me avisar se algum SKU <b>não encaixar</b> no padrão — eu ajusto a regra</div></div>
+  <div class="todo"><input type="checkbox" data-k="a7"><div>Usar o <b>mesmo padrão na Shopee</b> (e Amazon/Shein quando entrarem) — já fica compatível</div></div>
+</div>
+
+<div class="win" style="margin:14px 0">💡 <b>Por que importa pro Go:</b> kit com SKU certo = peça certa separada = sem "envio errado" = sem reclamação no marketplace. O padrão protege a reputação da conta.</div>
+
+<footer>ZEIG · sua parte para o Go · marque os itens · progresso salvo no aparelho</footer>
+</div>
+<script>
+var t=document.querySelectorAll('input[type=checkbox][data-k]');
+function up(){var n=t.length,f=0;t.forEach(c=>{if(c.checked)f++;});document.getElementById('ptxt').textContent=f+" de "+n;document.getElementById('pfill').style.width=(n?Math.round(100*f/n):0)+"%";}
+t.forEach(c=>{var k='zeig-ago-'+c.dataset.k;c.checked=localStorage.getItem(k)==='1';c.addEventListener('change',()=>{localStorage.setItem(k,c.checked?'1':'0');up();});});up();
+</script>
+</body>
+</html>
