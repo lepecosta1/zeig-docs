@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZEIG · Plano de Deploy 20/06 — Go/NoGo</title>
+<style>
+  :root{--denim:#1e3a5f;--indigo:#27418f;--claro:#eef2fa;--ok:#1a7f4e;--alerta:#b3261e;--areia:#f7f6f2;--amar:#b26a00}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,'Segoe UI',Roboto,sans-serif;background:var(--areia);color:#1c1c1e;font-size:16px;line-height:1.55}
+  .wrap{max-width:640px;margin:0 auto;padding:16px 14px 50px}
+  header{background:linear-gradient(135deg,var(--denim),var(--indigo));color:#fff;border-radius:14px;padding:22px 18px;margin-bottom:16px}
+  header .marca{font-weight:800;letter-spacing:3px;font-size:13px;opacity:.85}
+  header h1{font-size:21px;margin-top:6px}header p{font-size:13px;opacity:.85;margin-top:8px}
+  .veredito{background:#fff;border:2px solid var(--amar);border-radius:14px;padding:16px;margin-bottom:16px;text-align:center}
+  .veredito .big{font-size:24px;font-weight:800;color:var(--amar)}
+  .card{background:#fff;border:1px solid #e4e2da;border-radius:12px;padding:16px;margin-bottom:14px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+  h2{font-size:17px;color:var(--denim);margin-bottom:10px}
+  p{margin-bottom:8px}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin:6px 0}
+  th,td{padding:8px 6px;border-bottom:1px solid #eee;text-align:left;vertical-align:top}
+  th{color:#777;font-size:11px;text-transform:uppercase}
+  .badge{display:inline-block;padding:3px 9px;border-radius:99px;font-size:11px;font-weight:700;white-space:nowrap}
+  .b-go{background:#e3f4ea;color:var(--ok)} .b-no{background:#fde9e7;color:var(--alerta)} .b-dep{background:#fff7e6;color:var(--amar)}
+  details{background:#fff;border:1px solid #e4e2da;border-radius:12px;margin-bottom:10px;overflow:hidden}
+  summary{padding:14px 16px;font-weight:700;font-size:15px;cursor:pointer;color:var(--denim);list-style:none;display:flex;justify-content:space-between;align-items:center}
+  summary::after{content:"▾";color:#999}details[open] summary::after{content:"▴"}
+  details .corpo{padding:0 16px 14px}
+  .todo{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid #f0efe9}
+  .todo:last-child{border-bottom:0}.todo input{width:21px;height:21px;accent-color:var(--indigo);flex-shrink:0;margin-top:2px}
+  .risk{border-left:4px solid var(--alerta);background:#fff5f4;padding:10px 12px;border-radius:8px;margin:8px 0;font-size:14px}
+  .win{border-left:4px solid var(--ok);background:#f1faf4;padding:10px 12px;border-radius:8px;margin:8px 0;font-size:14px}
+  footer{text-align:center;font-size:12px;color:#999;margin-top:22px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="marca">ZEIG · DENIM</div>
+  <h1>Plano de Deploy — Sábado 20/06</h1>
+  <p>Análise Go/NoGo · Leandro + IA · orquestração</p>
+</header>
+
+<div class="veredito">
+  <div style="font-size:12px;color:#777;text-transform:uppercase;letter-spacing:1px">Veredito de engenharia</div>
+  <div class="big">GO PARCIAL</div>
+  <p style="font-size:14px;margin-top:6px">Dia 20 sobe <b>só o Cockpit</b> (testado, com rollback). O 2º ERP e a integração ficam para quando tivermos acesso e teste — forçar tudo no dia 20 às cegas é o caminho do "deu merda".</p>
+</div>
+
+<div class="card">
+  <h2>🚦 Go/NoGo por componente (dia 20)</h2>
+  <table>
+    <tr><th>Componente</th><th>Status</th><th>Por quê</th></tr>
+    <tr><td><b>Cockpit</b> — fix ML, kits, canais, custos, devolução</td><td><span class="badge b-go">GO</span></td><td>Testado (37 testes + massa real). Muda lógica, não dados. Rollback fácil.</td></tr>
+    <tr><td>Re-sync vendas antigas (custos)</td><td><span class="badge b-dep">CONDICIONAL</span></td><td>Mexe em dados → só com backup feito antes.</td></tr>
+    <tr><td><b>confeccao-erp</b> (2º ERP)</td><td><span class="badge b-no">NO-GO</span></td><td>Nunca vimos o código. Sem acesso = sem teste = sem deploy.</td></tr>
+    <tr><td>Integração entre os 2 ERPs</td><td><span class="badge b-no">NO-GO</span></td><td>Depende de ver o confeccao-erp.</td></tr>
+    <tr><td>Estoque regulador (nova feature)</td><td><span class="badge b-no">DEPOIS</span></td><td>Escopo grande. Não atropelar o deploy seguro.</td></tr>
+  </table>
+</div>
+
+<details open>
+  <summary>🛡️ Plano de segurança (backup + rollback)</summary>
+  <div class="corpo">
+    <p><b>Antes de QUALQUER coisa subir:</b></p>
+    <p>1. <b>Backup do banco</b> (Firestore produção) — exporto um snapshot completo. Se der ruim, restauramos.</p>
+    <p>2. <b>Tag do código</b> — marco o commit atual de produção (ponto de retorno).</p>
+    <p>3. <b>Rollback do site</b> — o Netlify guarda os deploys; reverter é 1 clique (volta pro anterior na hora).</p>
+    <div class="win">Nosso fix muda a LÓGICA de importação, não migra dados existentes. Então o risco ao que já está no banco é baixo — o rollback de código já resolve 90% dos cenários.</div>
+    <div class="risk">O único passo que MEXE em dados (re-sync de vendas antigas) só roda DEPOIS do backup, e separado do deploy — nunca junto.</div>
+  </div>
+</details>
+
+<details>
+  <summary>🔑 Acessos a obter ANTES do dia 20 (crítico)</summary>
+  <div class="corpo">
+    <p>Pegar acesso no dia do deploy = zero tempo de teste = risco amador. Precisamos disto <b>antes</b>:</p>
+    <div class="todo"><input type="checkbox" data-k="ac1"><div>Código do <b>confeccao-erp</b> (repo) — sem isso, ele é NO-GO</div></div>
+    <div class="todo"><input type="checkbox" data-k="ac2"><div>Painel <b>Netlify</b> do Omar (ver Usage real + configurar deploy/rollback)</div></div>
+    <div class="todo"><input type="checkbox" data-k="ac3"><div>App de API <b>TikTok Shop</b> (Partner Center: App Key/Secret)</div></div>
+    <div class="todo"><input type="checkbox" data-k="ac4"><div>Confirmar acesso ao <b>Bling</b> e <b>Firebase</b> de produção (p/ backup e validar os 67 pedidos)</div></div>
+    <div class="win">Argumento para o Omar: "Acesso antes = a gente testa e garante. Acesso no dia = a gente descobre os problemas na frente do cliente."</div>
+  </div>
+</details>
+
+<details>
+  <summary>⚠️ Riscos × Vantagens do dia 20</summary>
+  <div class="corpo">
+    <p style="font-weight:700;color:var(--ok)">Vantagens de subir o Cockpit dia 20:</p>
+    <div class="win">Fim da digitação manual no ML · margem real por venda · devolução correta · pronto p/ Shopee e novos canais. Ganho imediato e visível.</div>
+    <p style="font-weight:700;color:var(--alerta);margin-top:8px">Riscos (e mitigação):</p>
+    <div class="risk"><b>Netlify a 75%:</b> precisamos ver o Usage real — se for tráfego (bandwidth), deploy não muda; se for build, 1 deploy estático custa quase nada. Mito provável.</div>
+    <div class="risk"><b>confeccao-erp às cegas:</b> mitigado tirando-o do escopo do dia 20.</div>
+    <div class="risk"><b>Contas a pagar/receber em produção:</b> gerar SEM auto-liquidar — entram como "a revisar", Omar confere antes. Risco controlado.</div>
+    <div class="risk"><b>67 pedidos:</b> rodar a importação contra os 67 reais no ambiente de teste ANTES, e conferir os custos. Prova de fogo antes da produção.</div>
+  </div>
+</details>
+
+<details>
+  <summary>📡 Novos marketplaces (Shopee, Amazon, Shein, Temu)</summary>
+  <div class="corpo">
+    <div class="win">Já resolvido na arquitetura. O sistema identifica o canal pelo CNPJ do intermediador — qualquer marketplace novo é detectado sozinho na 1ª venda e fica registrável na tela. Shopee entra automático; só configuramos a regra de custo dela quando aparecer.</div>
+  </div>
+</details>
+
+<details>
+  <summary>📦 Estoque regulador (a feature nova do Omar)</summary>
+  <div class="corpo">
+    <p>Ponto de reposição = estoque mínimo + (lead time × velocidade de venda). O Cockpit já calcula velocidade de venda — a base existe. Mas é feature nova e estratégica: <b>não entra no dia 20</b>. Vira projeto próprio, pós-deploy, bem desenhado (é o que evita furo de reposição quando escalar).</p>
+  </div>
+</details>
+
+<details>
+  <summary>⚙️ Automação assíncrona — os 4 níveis</summary>
+  <div class="corpo">
+    <p>"Automático de verdade" não é 1 botão — são níveis de maturidade:</p>
+    <table>
+      <tr><th>Nível</th><th>O que é</th><th>Status</th></tr>
+      <tr><td><b>1 · Semi-auto</b></td><td>botão "Atualizar" puxa tudo do Bling com custos certos</td><td><span class="badge b-go">PRONTO</span></td></tr>
+      <tr><td><b>2 · Agendado</b></td><td>rotina roda sozinha de X em X horas (sem clicar)</td><td><span class="badge b-dep">1-2 sem</span></td></tr>
+      <tr><td><b>3 · Tempo real</b></td><td>webhook: o Bling/marketplace avisa na hora da venda</td><td><span class="badge b-no">Fase B</span></td></tr>
+      <tr><td><b>4 · Repasse real</b></td><td>APIs diretas ML/TikTok + conciliação com o dinheiro que caiu</td><td><span class="badge b-no">Fase B</span></td></tr>
+    </table>
+    <div class="risk">Níveis 3-4 (assíncrono real + APIs diretas dos 3 marketplaces) são <b>semanas</b> de trabalho com teste. Não cabem com qualidade até 20/06. Tentar = correria = furo.</div>
+    <div class="win">Para o 1º deploy basta o Nível 1 (pronto) — já mata a digitação manual. Automação real vira 2ª onda, sem pressão.</div>
+  </div>
+</details>
+
+<div class="card" style="border:2px solid var(--indigo)">
+  <h2>📅 Proposta: nova data com gordura</h2>
+  <p>20/06 está apertado (4 dias, sexta tem jogo do Brasil, e faltam acessos). Releases pequenos e espaçados são mais seguros que um "big bang". Proposta faseada:</p>
+  <table>
+    <tr><th>Onda</th><th>O quê</th><th>Data sugerida</th></tr>
+    <tr><td><b>Dia 20</b></td><td>Vira <b>CHECKPOINT</b>: validar 67 pedidos, fechar acessos, ensaio em teste (sem produção)</td><td>Sáb 20/06</td></tr>
+    <tr><td><b>Deploy 1</b></td><td>Cockpit (custos certos, Nível 1) em produção, com backup+rollback</td><td><b>Sáb 27/06</b></td></tr>
+    <tr><td><b>Deploy 2</b></td><td>Automação agendada (Nível 2) + APIs diretas (Fase B)</td><td>Meados julho</td></tr>
+    <tr><td><b>Deploy 3</b></td><td>2º ERP + integração + estoque regulador</td><td>Quando houver acesso+teste</td></tr>
+  </table>
+  <div class="win">Ganha 1 semana de gordura, separa o risco em pedaços, e o Omar vê valor já no dia 27 — sem correria e sem furar a produção.</div>
+</div>
+
+<div class="card">
+  <h2>🗓️ Cronograma sugerido até 20/06</h2>
+  <div class="todo"><input type="checkbox" data-k="cr1"><div><b>Até qua:</b> obter acessos (confeccao-erp, Netlify, Firebase prod, Bling)</div></div>
+  <div class="todo"><input type="checkbox" data-k="cr2"><div><b>Qui:</b> rodar os 67 pedidos reais no teste + validar custos · ver o confeccao-erp</div></div>
+  <div class="todo"><input type="checkbox" data-k="cr3"><div><b>Sex:</b> backup do banco + tag do código + ensaio do deploy (staging)</div></div>
+  <div class="todo"><input type="checkbox" data-k="cr4"><div><b>Sáb 20:</b> deploy do Cockpit + verificação + rollback de prontidão</div></div>
+  <div class="todo"><input type="checkbox" data-k="cr5"><div><b>Decisão Go/NoGo final:</b> sexta à noite, com tudo testado</div></div>
+</div>
+
+<footer>ZEIG · plano vivo · marque os itens conforme avançar · progresso salvo no aparelho</footer>
+</div>
+<script>
+document.querySelectorAll('input[type=checkbox][data-k]').forEach(function(c){
+  var k='zeig-dep-'+c.dataset.k; c.checked=localStorage.getItem(k)==='1';
+  c.addEventListener('change',function(){ localStorage.setItem(k,c.checked?'1':'0'); });
+});
+</script>
+</body>
+</html>
