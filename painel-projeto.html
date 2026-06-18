@@ -65,6 +65,7 @@
   <button class="tab" onclick="tab('om',this)">👤 Omar</button>
   <button class="tab" onclick="tab('al',this)">👤 Alexandre</button>
   <button class="tab" onclick="tab('le',this)">🤖 Leandro + IA</button>
+  <button class="tab" onclick="tab('au',this)">🚀 Automação</button>
   <button class="tab" onclick="tab('ri',this)">⚠️ Riscos</button>
 </div>
 
@@ -168,6 +169,50 @@
     <div class="item"><input type="checkbox" data-k="l9"><div class="tx">Backup do banco de produção + tag do código</div></div>
     <div class="item"><input type="checkbox" data-k="l10"><div class="tx">Ensaio do deploy (staging) → Deploy 1 (27/06)</div></div>
     <div class="item"><input type="checkbox" data-k="l11"><div class="tx">Re-sync das vendas antigas (só após backup)</div></div>
+  </div>
+</div>
+
+<!-- ===================== AUTOMAÇÃO ===================== -->
+<div class="pane" id="au">
+  <div class="card">
+    <h2>🚀 A visão: tudo conectado (API + agêntico)</h2>
+    <p><b>Sim — a meta é essa.</b> No fim, os 2 ERPs + marketplaces + Bling + financeiro + produção falam entre si por API, com uma camada de IA (agentes) por cima coordenando.</p>
+    <div class="win"><b>A divisão que faz isso ser SEGURO:</b><br>
+      • <b>Motor</b> (vendas, dinheiro, estoque) = <b>API determinística</b>, regra fixa, à prova de erro.<br>
+      • <b>Inteligência</b> (prever, sugerir, escrever) = <b>agêntico (IA)</b>, sempre com <b>humano no loop</b> nas ações críticas.</div>
+    <div class="alert"><b>Princípio inegociável:</b> IA <u>nunca</u> decide dinheiro sozinha. Ela <b>prepara e sugere</b> (ex.: "essa venda tem custo estranho", "hora de repor a ref X"), e o humano <b>confirma</b> o que paga, produz ou responde.</div>
+  </div>
+
+  <div class="card">
+    <h2>🪜 A escada da automação (4 fases)</h2>
+    <div class="chain">
+      <div class="step"><div class="n ok">1</div><div><b>Semi-automático</b> — botão importa do Bling com custos certos, cálculos sozinhos <span class="st s-ok">AGORA · deploy 27/06</span></div></div>
+      <div class="step"><div class="n">2</div><div><b>API / Agendado</b> — importação roda sozinha (cron), webhooks (tempo real), APIs diretas ML/TikTok/Shopee (repasse real), conciliação automática <span class="st s-do">JULHO</span></div></div>
+      <div class="step"><div class="n">3</div><div><b>Agêntico</b> — agentes de IA: estoque regulador, anomalia financeira, atendimento, precificação, relatórios em linguagem natural <span class="st s-tf">FASE 3</span></div></div>
+      <div class="step"><div class="n">4</div><div><b>Orquestração total</b> — 2 ERPs + canais + produção num cérebro só, supervisão humana <span class="st s-tf">VISÃO</span></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🧭 Manual × API × Agêntico (por função)</h2>
+    <table>
+      <tr><th>Função</th><th>Hoje</th><th>Vira API</th><th>Vira agêntico</th></tr>
+      <tr><td>Importar vendas</td><td>botão</td><td>auto (jul)</td><td>—</td></tr>
+      <tr><td>Custos/comissão/frete</td><td>API ✅</td><td>repasse real (jul)</td><td>detecta anomalia (F3)</td></tr>
+      <tr><td>Financeiro (pagar/receber)</td><td>API ✅</td><td>concilia c/ banco (jul)</td><td>—</td></tr>
+      <tr><td>Estoque</td><td>API ✅</td><td>sync auto (jul)</td><td>regulador prevê reposição (F3)</td></tr>
+      <tr><td>Devoluções</td><td>API ✅</td><td>auto via marketplace (jul)</td><td>—</td></tr>
+      <tr><td>Reclamações</td><td>manual</td><td>—</td><td>agente rascunha resposta (F3)</td></tr>
+      <tr><td>Precificação</td><td>manual</td><td>—</td><td>agente sugere preço (F3)</td></tr>
+      <tr><td>Anúncios (Alexandre)</td><td>manual</td><td>—</td><td>agente gera/otimiza (F3)</td></tr>
+      <tr><td>Relatórios/insights</td><td>manual</td><td>dashboard (jul)</td><td>agente narra a semana (F3)</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>🙋 O que SEMPRE terá humano no loop</h2>
+    <p>Por design, nunca 100% automático sem confirmação: <b>pagar</b>, <b>mandar produzir</b>, <b>responder cliente</b>, <b>mudar preço</b>. A IA prepara tudo mastigado; a decisão final é de vocês.</p>
+    <div class="warn">Isso não é limitação — é o que diferencia um sistema sério de um que "alucina" com o dinheiro do Omar.</div>
   </div>
 </div>
 
