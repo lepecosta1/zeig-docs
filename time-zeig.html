@@ -75,6 +75,23 @@
   .ask li{color:#e7edf8}.ask li::before{color:var(--thread)}
   .ask .rule{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);
     border-radius:11px;padding:12px 14px;margin-top:10px;font-size:13.5px}
+  .tl{position:relative;margin:16px 0 6px;padding-left:8px}
+  .tl::before{content:"";position:absolute;left:15px;top:6px;bottom:6px;width:3px;
+    background:linear-gradient(180deg,var(--sky),var(--indigo) 45%,var(--gold));border-radius:3px}
+  .mile{position:relative;padding:0 0 20px 44px;min-height:44px}
+  .mile:last-child{padding-bottom:0}
+  .mile .dot{position:absolute;left:6px;top:2px;width:22px;height:22px;border-radius:50%;
+    background:#fff;border:3px solid var(--indigo);display:flex;align-items:center;justify-content:center;
+    font-size:11px;font-weight:800;color:var(--denim);z-index:1}
+  .mile.goal .dot{border-color:var(--gold);background:var(--gold);color:#2a1d05}
+  .mile .when{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--indigo)}
+  .mile.goal .when{color:#9a6b16}
+  .mile .tt{font-size:14.5px;font-weight:800;color:var(--denim);margin:1px 0 2px}
+  .mile .ds{font-size:13px;color:var(--muted);margin:0}
+  .mile .bar{height:8px;border-radius:6px;background:#e6ecf6;margin-top:7px;overflow:hidden}
+  .mile .bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--sky),var(--indigo))}
+  .mile.goal .bar i{background:linear-gradient(90deg,var(--gold),#c98f2e)}
+  .mile .val{font-size:12px;font-weight:800;color:var(--denim2);float:right}
   .ninja{font-size:14.5px;background:#eef2f9;border-left:4px solid var(--indigo);
     padding:12px 14px;border-radius:0 10px 10px 0;margin:12px 0;color:var(--denim)}
   .star{background:#fff8ec;border:1px solid #f0dcb0;border-radius:13px;padding:16px;margin-top:12px;text-align:center}
@@ -198,7 +215,43 @@
   </section>
 
   <section>
-    <h2><span class="n">6</span> O compromisso</h2>
+    <h2><span class="n">6</span> Linha do tempo executiva</h2>
+    <p class="lead">Onde entramos, quando cada peça sobe e a curva de faturamento acompanhando.</p>
+    <div class="tl">
+      <div class="mile">
+        <span class="dot">1</span>
+        <div class="when">Julho · agora</div>
+        <div class="tt">Arrumar a casa</div>
+        <p class="ds">ERP com custo real, papéis definidos, Dani despachando, atendimento com dono. Dados na nuvem e acessos criados.</p>
+        <div class="bar"><span class="val">~R$30k</span><i style="width:30%"></i></div>
+      </div>
+      <div class="mile">
+        <span class="dot">2</span>
+        <div class="when">Ago–Set · +30%</div>
+        <div class="tt">Kits + 3 canais no ar</div>
+        <p class="ds">Kits do Alexandre publicados, Shopee somando a ML e TikTok, anúncios maduros vendendo mais com o mesmo esforço.</p>
+        <div class="bar"><span class="val">~R$45k</span><i style="width:45%"></i></div>
+      </div>
+      <div class="mile">
+        <span class="dot">3</span>
+        <div class="when">Out–Nov · 2x</div>
+        <div class="tt">Automação assíncrona</div>
+        <p class="ds">Agentes puxando pedidos, custos e mensagens sozinhos. Resposta rápida melhora reputação e destrava mais venda.</p>
+        <div class="bar"><span class="val">~R$65k</span><i style="width:65%"></i></div>
+      </div>
+      <div class="mile goal">
+        <span class="dot">★</span>
+        <div class="when">Dez+ · meta</div>
+        <div class="tt">Máquina rodando — R$100k escalável</div>
+        <p class="ds">Novos produtos e canais entram sem quebrar a operação. O sistema aguenta o volume e cresce sem contratar a cada degrau.</p>
+        <div class="bar"><span class="val">R$100k</span><i style="width:100%"></i></div>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:12px;font-size:12.5px">Os valores são a curva-alvo do caminho — a régua é o resultado, mês a mês.</p>
+  </section>
+
+  <section>
+    <h2><span class="n">7</span> O compromisso</h2>
     <p>Eu topei carregar mais: <b>construir o ERP</b>, <b>treinar a Dani</b> pra despachar sozinha e <b>assumir o atendimento</b> nas três plataformas. Não pra segurar o cargo — porque <b>acredito que dá pra colocar a Zeig na estratosfera</b> e fazer o que nenhum ERP de confecção faz por aí.</p>
     <p>O que eu peço em troca é confiança e autonomia pra executar. O Omar julga pelo resultado — e é isso que a gente vai entregar.</p>
     <div class="ninja"><b>Zeig com a pessoa certa no volante.</b> Vamos construir isso juntos e ir em frente.</div>
