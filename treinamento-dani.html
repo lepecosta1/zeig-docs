@@ -33,14 +33,15 @@
   p.lead{color:var(--muted);font-size:14px;margin-bottom:8px}
   p{font-size:14.5px;margin-bottom:8px}
   ol.steps{list-style:none;counter-reset:s;margin:8px 0}
-  ol.steps li{counter-increment:s;position:relative;padding:10px 10px 10px 44px;margin-bottom:8px;
-    border:1px solid var(--line);border-radius:11px;background:#fbfcfe;font-size:14px}
+  ol.steps li{counter-increment:s;position:relative;padding:10px 92px 10px 44px;margin-bottom:8px;
+    border:1px solid var(--line);border-radius:11px;background:#fbfcfe;font-size:14px;min-height:44px}
   ol.steps li::before{content:counter(s);position:absolute;left:10px;top:10px;width:24px;height:24px;
     background:var(--indigo);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;
     font-size:12px;font-weight:800}
   ol.steps li b{color:var(--denim)}
-  .t{display:inline-block;font-size:11px;font-weight:800;padding:2px 8px;border-radius:20px;
-    background:#eef2f9;color:var(--denim2);margin-left:6px;white-space:nowrap}
+  ol.steps li .t{position:absolute;right:10px;top:11px}
+  .t{display:inline-block;font-size:11px;font-weight:800;padding:3px 9px;border-radius:20px;
+    background:#eef2f9;color:var(--denim2);white-space:nowrap}
   .t.clock::before{content:"⏱ "}
   ul.plain{list-style:none;margin:6px 0}
   ul.plain li{position:relative;padding-left:22px;margin-bottom:6px;font-size:14px}
@@ -53,7 +54,7 @@
   .cron{margin-top:12px}
   .slot{display:flex;gap:12px;align-items:flex-start;padding:11px;border:1px solid var(--line);
     border-radius:12px;margin-bottom:9px;background:#fff}
-  .slot .hr{flex:0 0 auto;width:88px;text-align:center;font-weight:800;color:var(--denim);
+  .slot .hr{flex:0 0 auto;width:92px;text-align:center;font-weight:800;color:var(--denim);
     background:#eef2f9;border-radius:10px;padding:8px 4px;font-size:13px}
   .slot .hr small{display:block;font-size:10px;color:var(--muted);font-weight:700}
   .slot .d h4{font-size:14px;color:var(--denim2);margin-bottom:2px}
@@ -67,6 +68,26 @@
   .box li{font-size:13.5px}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
   @media(max-width:600px){.grid2{grid-template-columns:1fr}}
+  .days{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px}
+  @media(max-width:640px){.days{grid-template-columns:1fr}}
+  .day{border:1px solid var(--line);border-radius:13px;padding:14px;background:#fbfcfe;position:relative;overflow:hidden}
+  .day::before{content:"";position:absolute;left:0;top:0;right:0;height:5px}
+  .day.d1::before{background:var(--ml)} .day.d2::before{background:var(--tk)} .day.d3::before{background:var(--sh)}
+  .day .dd{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--indigo);margin-top:4px}
+  .day h4{font-size:15px;color:var(--denim);margin:2px 0 6px}
+  .day p{font-size:12.5px;color:var(--muted);margin:0}
+  .flow{margin-top:12px}
+  .fstep{display:flex;align-items:center;gap:14px;padding:12px;border:1px solid var(--line);
+    border-radius:13px;background:#fff;margin-bottom:8px}
+  .fstep .ic{flex:0 0 auto;width:60px;height:60px;border-radius:12px;background:#eef2f9;
+    display:flex;align-items:center;justify-content:center}
+  .fstep .ic svg{width:38px;height:38px}
+  .fstep .fx{flex:1}
+  .fstep .fx h4{font-size:14.5px;color:var(--denim);margin-bottom:1px}
+  .fstep .fx p{font-size:12.5px;color:var(--muted);margin:0}
+  .fstep .num{flex:0 0 auto;width:24px;height:24px;border-radius:50%;background:var(--indigo);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800}
+  .farrow{text-align:center;color:var(--sky);font-size:20px;font-weight:800;line-height:.4;margin:-2px 0 6px 40px}
   .chk{list-style:none;margin:8px 0}
   .chk li{position:relative;padding:8px 8px 8px 34px;margin-bottom:6px;border:1px solid var(--line);
     border-radius:10px;font-size:14px;background:#fff}
@@ -75,12 +96,17 @@
   .total h2{color:#fff;justify-content:center} .total h2 .n{background:var(--gold);color:#2a1d05}
   .total .big{font-size:30px;font-weight:900;color:var(--thread);margin:6px 0}
   .total p{color:#e7edf8;font-size:13.5px}
+  .total table td,.total table th{color:#eaf0fa;border-color:rgba(255,255,255,.15)}
+  .total table th{background:rgba(255,255,255,.08)}
   .ninja{font-size:14.5px;background:#eef2f9;border-left:4px solid var(--indigo);
     padding:12px 14px;border-radius:0 10px 10px 0;margin:12px 0;color:var(--denim)}
   table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}
   th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top}
   th{background:#f0f3fa;color:var(--denim);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
   td.c{font-weight:800;color:var(--denim2);white-space:nowrap}
+  .cut td.h{font-weight:800;color:var(--red);white-space:nowrap}
+  .pbtn{display:inline-block;margin-top:14px;background:var(--gold);color:#2a1d05;font-weight:800;
+    text-decoration:none;padding:11px 18px;border-radius:12px;font-size:14px}
   footer{text-align:center;color:var(--muted);font-size:12.5px;margin-top:26px;padding:0 10px}
   footer b{color:var(--denim)}
   .stamp{display:inline-block;border:2px solid var(--gold);color:var(--gold);border-radius:8px;
@@ -93,167 +119,244 @@
   <h1>Treinamento Ninja de Expedição<br><span style="font-size:17px;opacity:.9">Mercado Livre · TikTok Shop · Shopee</span></h1>
   <p>Do computador desligado até o pacote no ponto de coleta. Passo a passo, com o tempo de cada etapa. Base: ~30 pedidos por marketplace por dia (90 no total).</p>
   <div class="badge">Para a Dani · Guia operacional Zeig</div>
+  <a class="pbtn" href="treinamento-dani-a4.html">🖨 Abrir versão A4 para imprimir</a>
 </header>
 
 <div class="wrap">
 
   <section>
-    <h2><span class="n">0</span> Antes de começar — o kit da mesa</h2>
-    <p class="lead">Ter tudo à mão evita corre-corre. Confira antes de sentar:</p>
+    <h2><span class="n">1</span> Plano de treinamento — 3 dias</h2>
+    <p class="lead">Um marketplace por dia. Começando hoje (quarta) e fechando na sexta. A cada dia: eu mostro, ela faz junto, depois faz sozinha.</p>
+    <div class="days">
+      <div class="day d1"><div class="dd">Quarta · hoje</div><h4>Mercado Livre + Flex</h4><p>O mais completo (tem o Flex, com horário de corte). Começamos por ele.</p></div>
+      <div class="day d2"><div class="dd">Quinta</div><h4>TikTok Shop</h4><p>Mesmo fluxo aprendido no ML, aplicado no painel do TikTok.</p></div>
+      <div class="day d3"><div class="dd">Sexta</div><h4>Shopee</h4><p>Fecha o ciclo. Na sexta ela roda os 3 sozinha, no ritmo.</p></div>
+    </div>
+    <div class="ninja"><b>Meta da sexta:</b> a Dani abre o dia, roda os 3 marketplaces de manhã sozinha e deixa a tarde livre pras vendas menores que forem pingando.</div>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span> O processo em desenhos — grave esta sequência</h2>
+    <p class="lead">São 7 passos, sempre na mesma ordem. Olhe os desenhos até decorar: essa é a "dança" da expedição.</p>
+    <div class="flow">
+
+      <div class="fstep"><span class="num">1</span>
+        <div class="ic"><svg viewBox="0 0 48 48" fill="none" stroke="#27406b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="9" width="36" height="24" rx="2"/><path d="M18 39h12M24 33v6"/><path d="M13 16h10M13 22h16" stroke="#6f9ceb"/></svg></div>
+        <div class="fx"><h4>Ligar e logar</h4><p>Computador ligado, entrar nas 3 contas.</p></div>
+        <span class="t clock">10 min</span></div>
+      <div class="farrow">↓</div>
+
+      <div class="fstep"><span class="num">2</span>
+        <div class="ic"><svg viewBox="0 0 48 48" fill="none" stroke="#27406b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="18" width="30" height="15" rx="2"/><path d="M14 18v-8h20v8"/><rect x="15" y="30" width="18" height="10" rx="1" fill="#eef2f9"/><path d="M18 34h12M18 37h9" stroke="#6f9ceb"/></svg></div>
+        <div class="fx"><h4>Imprimir etiquetas</h4><p>Todas de uma vez, na Zebra.</p></div>
+        <span class="t clock">5 min</span></div>
+      <div class="farrow">↓</div>
+
+      <div class="fstep"><span class="num">3</span>
+        <div class="ic"><svg viewBox="0 0 48 48" fill="none" stroke="#27406b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M24 7l4 5h-8l4-5z"/><path d="M24 12v7"/><rect x="9" y="19" width="30" height="9" rx="1.5"/><rect x="9" y="30" width="30" height="9" rx="1.5"/></svg></div>
+        <div class="fx"><h4>Separar</h4><p>Achar cada peça na prateleira pela referência.</p></div>
+        <span class="t clock">18 min</span></div>
+      <div class="farrow">↓</div>
+
+      <div class="fstep"><span class="num">4</span>
+        <div class="ic"><svg viewBox="0 0 48 48" fill="none" stroke="#27406b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="21" cy="21" r="12"/><path d="M30 30l8 8"/><path d="M16 21l4 4 7-8" stroke="#2f9e6f"/></svg></div>
+        <div class="fx"><h4>Conferir</h4><p>Referência, tamanho e cor batem com a etiqueta.</p></div>
+        <span class="t clock">9 min</span></div>
+      <div class="farrow">↓</div>
+
+      <div class="fstep"><span class="num">5</span>
+        <div class="ic"><svg viewBox="0 0 48 48" fill="none" stroke="#27406b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M24 7l15 8v18l-15 8-15-8V15l15-8z"/><path d="M9 15l15 8 15-8M24 23v18" stroke="#6f9ceb"/></svg></div>
+        <div class="fx"><h4>Embalar</h4><p>Dobrar, ensacar e colar a etiqueta esticada.</p></div>
+        <span class="t clock">28 min</span></div>
+      <div class="farrow">↓</div>
+
+      <div class="fstep"><span class="num">6</span>
+        <div class="ic"><svg viewBox="0 0 48 48" fill="none" stroke="#27406b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="26" width="10" height="12" rx="1"/><rect x="19" y="22" width="10" height="16" rx="1"/><rect x="31" y="18" width="10" height="20" rx="1"/></svg></div>
+        <div class="fx"><h4>Separar por marketplace</h4><p>3 pilhas: ML, TikTok, Shopee.</p></div>
+        <span class="t clock">5 min</span></div>
+      <div class="farrow">↓</div>
+
+      <div class="fstep"><span class="num">7</span>
+        <div class="ic"><svg viewBox="0 0 48 48" fill="none" stroke="#27406b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="16" width="22" height="15" rx="1.5"/><path d="M27 21h8l5 5v5h-13z"/><circle cx="15" cy="34" r="3.5"/><circle cx="34" cy="34" r="3.5"/></svg></div>
+        <div class="fx"><h4>Ponto de coleta</h4><p>Levar com o romaneio e pegar o comprovante.</p></div>
+        <span class="t clock">30–45 min</span></div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">3</span> Manhã × Tarde — o segredo do dia livre</h2>
+    <p class="lead">A ideia: fazer o grosso <b>cedo</b>. De manhã ela zera o lote acumulado; à tarde só passa rápido nas vendas menores que apareceram.</p>
+    <div class="cron">
+      <div class="slot"><div class="hr">08:00<small>lote da noite</small></div><div class="d"><h4>Manhã — lote principal (90 pedidos)</h4><p>Roda ML → TikTok → Shopee, tudo o que entrou desde ontem. É o bloco pesado.</p></div></div>
+      <div class="slot"><div class="hr">~12:00<small>fim da manhã</small></div><div class="d"><h4>Sai pra coleta</h4><p>Leva os 90 pacotes ao ponto de coleta. Manhã fechada.</p></div></div>
+      <div class="slot"><div class="hr">Tarde<small>15–30 min</small></div><div class="d"><h4>Passe rápido das vendas menores</h4><p>Só os pedidos novos do dia (poucos). Imprime, confere, embala e deixa separado pra coleta do dia seguinte — <b>menos o Flex, que sai no mesmo dia</b> (ver seção 6).</p></div></div>
+    </div>
+    <div class="box tip"><h4>✓ Por que de manhã</h4><ul class="plain"><li>Pega o Flex dentro do horário de corte (senão vira só no dia seguinte).</li><li>Libera a tarde da Dani pras outras atividades dela.</li><li>Se der algum problema (impressora, falta de peça), ainda tem o dia pra resolver.</li></ul></div>
+  </section>
+
+  <section>
+    <h2><span class="n">4</span> Antes de começar — o kit da mesa</h2>
     <ul class="plain">
       <li>Computador + internet ligados</li>
-      <li><b>Impressora Zebra</b> (térmica) com rolo de etiqueta 10×15 cm — ou impressora comum com papel A4 + fita/plástico adesivo</li>
+      <li><b>Impressora Zebra</b> (térmica) com rolo 10×15 cm — ou impressora comum + A4 + fita larga</li>
       <li>Sacos/plásticos de envio, fita, tesoura</li>
-      <li>Os produtos organizados por referência (SKU) na prateleira</li>
-      <li>Leitor de código de barras (se tiver) — ajuda a conferir sem errar</li>
+      <li>Produtos organizados por referência (SKU) na prateleira</li>
+      <li>Leitor de código de barras (se tiver)</li>
     </ul>
-    <div class="ninja"><b>Regra de ouro:</b> imprime tudo primeiro, depois separa, depois confere, depois embala. Nunca misture as etapas — é assim que erro de envio acontece.</div>
+    <div class="ninja"><b>Regra de ouro:</b> imprime tudo → separa → confere → embala. Nunca misture as etapas — é assim que erro de envio acontece.</div>
   </section>
 
   <section>
-    <h2><span class="n">1</span> Como é o dia — visão geral</h2>
-    <p class="lead">A rotina roda em blocos. Um marketplace de cada vez, na mesma ordem todo dia.</p>
-    <div class="cron">
-      <div class="slot"><div class="hr">08:00<small>10 min</small></div><div class="d"><h4>Ligar e logar</h4><p>Abrir computador, navegador e entrar nas 3 contas (deixar as abas abertas).</p></div></div>
-      <div class="slot"><div class="hr">08:10<small>~1h05</small></div><div class="d"><h4>Bloco Mercado Livre</h4><p>Imprimir etiquetas → separar → conferir → embalar (30 pedidos).</p></div></div>
-      <div class="slot"><div class="hr">09:15<small>~1h05</small></div><div class="d"><h4>Bloco TikTok Shop</h4><p>Mesmo fluxo (30 pedidos).</p></div></div>
-      <div class="slot"><div class="hr">10:20<small>~1h05</small></div><div class="d"><h4>Bloco Shopee</h4><p>Mesmo fluxo (30 pedidos).</p></div></div>
-      <div class="slot"><div class="hr">11:25<small>15 min</small></div><div class="d"><h4>Fechar romaneios</h4><p>Organizar por transportadora e gerar as listas de coleta.</p></div></div>
-      <div class="slot"><div class="hr">11:40<small>30–45 min</small></div><div class="d"><h4>Ponto de coleta</h4><p>Levar os pacotes / aguardar a coleta.</p></div></div>
-    </div>
-  </section>
-
-  <section>
-    <h2><span class="n">2</span> Ligar o computador e entrar nas contas</h2>
+    <h2><span class="n">5</span> Ligar o computador e entrar nas contas <span class="t clock" style="font-size:12px">10 min</span></h2>
     <ol class="steps">
       <li><b>Ligue o computador</b> e entre no Windows (senha da Zeig). <span class="t clock">2 min</span></li>
-      <li>Abra o <b>navegador (Chrome)</b>. As 3 contas ficam salvas nos favoritos da barra. <span class="t clock">1 min</span></li>
-      <li>Abra em <b>abas separadas</b>: Mercado Livre, TikTok Shop Seller Center e Shopee Seller Center. <span class="t clock">2 min</span></li>
-      <li>Faça <b>login em cada uma</b> (usuário e senha ficam no gerenciador de senhas / anotados no caderno da expedição). Se pedir código por SMS/app, confirme. <span class="t clock">5 min</span></li>
+      <li>Abra o <b>Chrome</b> — as 3 contas estão nos favoritos. <span class="t clock">1 min</span></li>
+      <li>Abra em <b>abas separadas</b>: ML, TikTok Seller Center e Shopee Seller Center. <span class="t clock">2 min</span></li>
+      <li>Faça <b>login em cada uma</b>. Se pedir código por SMS/app, confirme. <span class="t clock">5 min</span></li>
     </ol>
-    <div class="box warn"><h4>⚠ Atenção</h4><ul class="plain"><li>Nunca compartilhe as senhas por WhatsApp ou com pessoas de fora.</li><li>Se uma conta pedir verificação estranha, avise o Leandro antes de continuar.</li></ul></div>
+    <div class="box warn"><h4>⚠ Segurança</h4><ul class="plain"><li>Nunca compartilhe as senhas por WhatsApp nem com gente de fora.</li><li>Verificação estranha? Avise o Leandro antes de seguir.</li></ul></div>
   </section>
 
   <section>
-    <h2><span class="n">3</span> Mercado Livre — passo a passo</h2>
+    <h2><span class="n">6</span> Mercado Livre + Flex — o dia 1</h2>
     <div class="mk ml">
-      <span class="tag">MERCADO LIVRE</span>
+      <span class="tag">MERCADO LIVRE — fluxo</span>
       <ol class="steps">
-        <li>No painel, clique em <b>Vendas</b> → <b>Etiquetas</b> (ou "Pedidos a enviar"). <span class="t clock">1 min</span></li>
-        <li>Selecione <b>todos os pedidos prontos para despacho</b> (marque a caixa do topo para selecionar todos). <span class="t clock">1 min</span></li>
-        <li>Clique em <b>Imprimir etiquetas</b>. O ML gera um PDF com todas juntas. <span class="t">30 pedidos</span> <span class="t clock">2 min</span></li>
-        <li><b>Imprima</b> (veja a seção de impressão para configurar a Zebra ou a comum). <span class="t clock">4 min</span></li>
-        <li><b>Separe</b> os produtos: pegue cada etiqueta, leia a referência/SKU e busque a peça na prateleira. <span class="t clock">18 min</span></li>
-        <li><b>Confira</b> peça × etiqueta: referência, tamanho e cor. Bipe o código se tiver leitor. <span class="t clock">9 min</span></li>
-        <li><b>Embale</b>, cole a etiqueta bem esticada (código de barras legível) e separe na caixa "ML". <span class="t clock">28 min</span></li>
+        <li><b>Vendas</b> → <b>Etiquetas</b> (ou "Pedidos a enviar"). <span class="t clock">1 min</span></li>
+        <li>Marque <b>todos os pedidos prontos</b> (caixa do topo seleciona todos). <span class="t clock">1 min</span></li>
+        <li><b>Imprimir etiquetas</b> → gera um PDF com todas juntas. <span class="t clock">2 min</span></li>
+        <li><b>Imprima</b> (Zebra ou comum — ver seção 9). <span class="t clock">4 min</span></li>
+        <li><b>Separe</b> as peças pela referência de cada etiqueta. <span class="t clock">18 min</span></li>
+        <li><b>Confira</b> referência, tamanho e cor. <span class="t clock">9 min</span></li>
+        <li><b>Embale</b>, cole a etiqueta e ponha na caixa "ML". <span class="t clock">28 min</span></li>
       </ol>
-      <p class="lead" style="margin-top:6px">Total do bloco ML: <b>~1h05</b> para 30 pedidos.</p>
+      <p class="lead" style="margin-top:6px">Bloco ML: <b>~1h05</b> para 30 pedidos.</p>
     </div>
-    <div class="box tip"><h4>✓ Dica ninja ML</h4><ul class="plain"><li>Pedidos <b>Full</b> não passam por você (já estão no ML). Você cuida de <b>Flex</b> e <b>Coletas/Agências</b>.</li><li>O <b>Flex</b> tem horário-limite de despacho — faça o ML primeiro no dia pra não perder a janela.</li></ul></div>
+
+    <h3>O que é o Flex (Mercado Envios Flex)</h3>
+    <p>O <b>Flex</b> é a entrega no <b>mesmo dia</b> feita por uma transportadora que passa na Zeig num horário combinado. Como sai no mesmo dia, ele tem um <b>horário de corte</b>: pedido pago antes do corte = despacha hoje; depois do corte = vai só amanhã.</p>
+    <ol class="steps">
+      <li>No painel, os pedidos <b>Flex</b> aparecem marcados (ícone/etiqueta "Flex"). Faça <b>eles primeiro</b>. <span class="t clock">—</span></li>
+      <li>Imprima as <b>etiquetas Flex</b> junto com as demais, mas <b>separe numa pilha só de Flex</b>. <span class="t clock">2 min</span></li>
+      <li>Deixe a pilha Flex <b>pronta antes do horário de corte</b> para a transportadora que coleta o Flex. <span class="t clock">—</span></li>
+      <li>Quando a transportadora Flex chegar, <b>entregue a pilha Flex</b> e confirme no app/painel. <span class="t clock">5 min</span></li>
+    </ol>
+
+    <h3>Horários de corte — deixe colado na parede</h3>
+    <table class="cut">
+      <tr><th>Canal / tipo</th><th>Corte sugerido</th><th>O que significa</th></tr>
+      <tr><td>ML <b>Flex</b></td><td class="h">até 11:00</td><td>Pago antes disso, despacha hoje. Depois, vai amanhã.</td></tr>
+      <tr><td>ML Coleta/Agência</td><td class="h">até 12:00</td><td>Pronto até meio-dia entra na coleta do dia.</td></tr>
+      <tr><td>TikTok Shop</td><td class="h">até 12:00</td><td>Coleta diária — processar de manhã garante o dia.</td></tr>
+      <tr><td>Shopee</td><td class="h">até 14:00</td><td>Coleta/postagem do dia; leve a lista de coleta junto.</td></tr>
+    </table>
+    <div class="box warn"><h4>⚠ Confirmar com o Leandro</h4><p style="font-size:13.5px;margin:0">Esses horários são o <b>padrão sugerido</b>. O corte real do Flex e das coletas depende do que está configurado na conta e da transportadora da Zeig — o Leandro confirma e a gente fixa os números certos aqui.</p></div>
   </section>
 
   <section>
-    <h2><span class="n">4</span> TikTok Shop — passo a passo</h2>
+    <h2><span class="n">7</span> TikTok Shop — o dia 2</h2>
     <div class="mk tk">
       <span class="tag">TIKTOK SHOP</span>
       <ol class="steps">
-        <li>No <b>Seller Center</b>, clique em <b>Pedidos</b> → <b>A enviar / To ship</b>. <span class="t clock">1 min</span></li>
-        <li>Marque os pedidos e clique em <b>Imprimir etiqueta</b> (Print label) — pode gerar junto o <b>romaneio/packing list</b>. <span class="t">30 pedidos</span> <span class="t clock">2 min</span></li>
-        <li><b>Imprima</b> as etiquetas (mesmo esquema Zebra/comum). <span class="t clock">4 min</span></li>
-        <li><b>Separe</b> os produtos pela referência de cada etiqueta. <span class="t clock">18 min</span></li>
+        <li><b>Pedidos</b> → <b>A enviar / To ship</b>. <span class="t clock">1 min</span></li>
+        <li>Marque os pedidos → <b>Imprimir etiqueta</b> (pode gerar o romaneio junto). <span class="t clock">2 min</span></li>
+        <li><b>Imprima</b> as etiquetas. <span class="t clock">4 min</span></li>
+        <li><b>Separe</b> pela referência. <span class="t clock">18 min</span></li>
         <li><b>Confira</b> referência, tamanho e cor. <span class="t clock">9 min</span></li>
-        <li><b>Embale</b>, cole a etiqueta e separe na caixa "TikTok". <span class="t clock">28 min</span></li>
-        <li>Marque no sistema como <b>Enviado/Despachado</b> quando fechar o romaneio (ou deixe pra etapa de coleta). <span class="t clock">2 min</span></li>
+        <li><b>Embale</b> e ponha na caixa "TikTok". <span class="t clock">28 min</span></li>
+        <li>Marque como <b>Enviado</b> ao fechar o romaneio. <span class="t clock">2 min</span></li>
       </ol>
-      <p class="lead" style="margin-top:6px">Total do bloco TikTok: <b>~1h05</b> para 30 pedidos.</p>
+      <p class="lead" style="margin-top:6px">Bloco TikTok: <b>~1h05</b> para 30 pedidos.</p>
     </div>
-    <div class="box tip"><h4>✓ Dica ninja TikTok</h4><ul class="plain"><li>O TikTok costuma pedir para <b>confirmar a coleta/transportadora</b> na hora de imprimir — escolha a mesma que a Zeig já usa.</li><li>Fique de olho no <b>prazo de despacho</b> (aparece em vermelho quando está perto de vencer). Esses vão primeiro.</li></ul></div>
+    <div class="box tip"><h4>✓ Dica TikTok</h4><ul class="plain"><li>Na hora de imprimir ele pede a <b>transportadora/coleta</b> — escolha a mesma que a Zeig usa.</li><li>Prazo em <b>vermelho</b> = quase vencendo. Esses vão primeiro.</li></ul></div>
   </section>
 
   <section>
-    <h2><span class="n">5</span> Shopee — passo a passo</h2>
+    <h2><span class="n">8</span> Shopee — o dia 3</h2>
     <div class="mk sh">
       <span class="tag">SHOPEE</span>
       <ol class="steps">
-        <li>No <b>Seller Center</b>, clique em <b>Meus Pedidos</b> → <b>A enviar</b>. <span class="t clock">1 min</span></li>
-        <li>Marque todos e clique em <b>Imprimir etiqueta de envio</b>. Marque também <b>Imprimir lista de coleta</b> (documento que vai junto na coleta). <span class="t">30 pedidos</span> <span class="t clock">2 min</span></li>
+        <li><b>Meus Pedidos</b> → <b>A enviar</b>. <span class="t clock">1 min</span></li>
+        <li>Marque todos → <b>Imprimir etiqueta</b> + <b>Imprimir lista de coleta</b>. <span class="t clock">2 min</span></li>
         <li><b>Imprima</b> etiquetas + lista de coleta. <span class="t clock">4 min</span></li>
-        <li><b>Separe</b> os produtos pela referência. <span class="t clock">18 min</span></li>
+        <li><b>Separe</b> pela referência. <span class="t clock">18 min</span></li>
         <li><b>Confira</b> referência, tamanho e cor. <span class="t clock">9 min</span></li>
-        <li><b>Embale</b>, cole a etiqueta e separe na caixa "Shopee". <span class="t clock">28 min</span></li>
-        <li><b>"Organizar envio"</b> no sistema para confirmar que vão com a transportadora Shopee. <span class="t clock">3 min</span></li>
+        <li><b>Embale</b> e ponha na caixa "Shopee". <span class="t clock">28 min</span></li>
+        <li><b>"Organizar envio"</b> pra confirmar a transportadora Shopee. <span class="t clock">3 min</span></li>
       </ol>
-      <p class="lead" style="margin-top:6px">Total do bloco Shopee: <b>~1h05</b> para 30 pedidos.</p>
+      <p class="lead" style="margin-top:6px">Bloco Shopee: <b>~1h05</b> para 30 pedidos.</p>
     </div>
-    <div class="box tip"><h4>✓ Dica ninja Shopee</h4><ul class="plain"><li>A Shopee exige a <b>lista de coleta impressa</b> junto dos pacotes — sem ela a coleta pode ser recusada.</li><li>Etiqueta Shopee tem um <b>número de rastreio</b> — não cubra o código de barras com fita opaca.</li></ul></div>
+    <div class="box tip"><h4>✓ Dica Shopee</h4><ul class="plain"><li>A <b>lista de coleta impressa</b> é obrigatória — sem ela a coleta pode ser recusada.</li><li>Não cubra o <b>código de rastreio</b> com fita opaca.</li></ul></div>
   </section>
 
   <section>
-    <h2><span class="n">6</span> Impressão das etiquetas</h2>
-    <p class="lead">Duas formas. A Zebra é mais rápida e profissional; a comum quebra o galho.</p>
+    <h2><span class="n">9</span> Impressão das etiquetas</h2>
     <div class="box zebra">
       <h4>🖨 Impressora Zebra (térmica) — a preferida</h4>
       <ul class="plain">
-        <li>Papel: rolo de etiqueta <b>10×15 cm</b> (térmica, não precisa tinta).</li>
-        <li>Na hora de imprimir, escolha a impressora <b>Zebra</b> e o tamanho de papel <b>100×150 mm</b>.</li>
-        <li>Em "Mais configurações": <b>Margens = Nenhuma</b> e <b>Escala = 100% / Tamanho real</b> (não deixe "Ajustar à página" — corta o código).</li>
-        <li>Imprima <b>1 etiqueta por página</b>. Cada etiqueta já sai destacável.</li>
+        <li>Papel: rolo <b>10×15 cm</b> (térmico, sem tinta).</li>
+        <li>Escolha a impressora <b>Zebra</b> e o tamanho <b>100×150 mm</b>.</li>
+        <li>Em "Mais configurações": <b>Margens = Nenhuma</b> e <b>Escala = 100% / Tamanho real</b> (não use "Ajustar à página" — corta o código).</li>
+        <li><b>1 etiqueta por página</b>.</li>
       </ul>
     </div>
     <div class="box zebra">
       <h4>🖨 Impressora comum (A4) — plano B</h4>
       <ul class="plain">
-        <li>Imprima o PDF em <b>folha A4</b> (cabe 2 a 4 etiquetas por folha, dependendo do marketplace).</li>
-        <li><b>Recorte</b> cada etiqueta na linha.</li>
-        <li>Cole no pacote com <b>fita larga transparente</b> por cima de toda a etiqueta (protege da chuva) — mas <b>sem amassar o código de barras</b>.</li>
+        <li>Imprima o PDF em <b>A4</b> (2 a 4 etiquetas por folha).</li>
+        <li><b>Recorte</b> cada etiqueta.</li>
+        <li>Cole com <b>fita larga transparente</b> por cima — sem amassar o código.</li>
       </ul>
     </div>
-    <div class="box warn"><h4>⚠ Erros que estragam a etiqueta</h4><ul class="plain"><li>Código de barras <b>borrado, torto ou amassado</b> = transportadora não bipa = pacote volta.</li><li>Etiqueta do <b>pedido errado</b> no pacote = produto vai pro cliente errado. Sempre confira antes de colar.</li></ul></div>
+    <div class="box warn"><h4>⚠ Erros que estragam a etiqueta</h4><ul class="plain"><li>Código <b>borrado, torto ou amassado</b> = não bipa = pacote volta.</li><li>Etiqueta do <b>pedido errado</b> = produto pro cliente errado. Confira antes de colar.</li></ul></div>
   </section>
 
   <section>
-    <h2><span class="n">7</span> Conferência e embalagem — o padrão Zeig</h2>
-    <p class="lead">A conferência é o que evita devolução. Faça sempre igual:</p>
+    <h2><span class="n">10</span> Conferência — o padrão Zeig (~1 min/pacote)</h2>
     <ol class="steps">
-      <li>Pegue a <b>etiqueta</b> e leia a <b>referência (SKU), tamanho e cor</b>. <span class="t clock">5 s</span></li>
-      <li>Pegue a <b>peça</b> correspondente e compare os 3 itens (ref, tamanho, cor). <span class="t clock">10 s</span></li>
-      <li>Confira se a peça está <b>sem defeito</b> (costura, botão, mancha). <span class="t clock">5 s</span></li>
-      <li><b>Dobre e embale</b> com padrão (peça limpa, sacola fechada). <span class="t clock">30 s</span></li>
-      <li>Cole a etiqueta <b>esticada</b> e coloque na caixa do marketplace certo. <span class="t clock">15 s</span></li>
+      <li>Leia na <b>etiqueta</b>: referência (SKU), tamanho e cor. <span class="t clock">5 s</span></li>
+      <li>Pegue a <b>peça</b> e compare os 3 itens. <span class="t clock">10 s</span></li>
+      <li>Veja se está <b>sem defeito</b> (costura, botão, mancha). <span class="t clock">5 s</span></li>
+      <li><b>Dobre e embale</b> com padrão. <span class="t clock">30 s</span></li>
+      <li>Cole a etiqueta <b>esticada</b> na caixa certa. <span class="t clock">15 s</span></li>
     </ol>
-    <div class="ninja"><b>~1 minuto por pacote</b> no ritmo ninja. Com 90 pacotes/dia, a conferência bem feita é o que segura a reputação lá em cima.</div>
+    <div class="ninja">Conferência bem feita = <b>reputação lá em cima</b> = mais venda. É a parte mais importante do dia.</div>
   </section>
 
   <section>
-    <h2><span class="n">8</span> Romaneio e ponto de coleta</h2>
+    <h2><span class="n">11</span> Romaneio e ponto de coleta</h2>
     <ol class="steps">
-      <li>Separe os pacotes em <b>3 pilhas</b>: ML, TikTok, Shopee (cada um tem transportadora/coleta própria). <span class="t clock">5 min</span></li>
-      <li>Confira que cada pilha tem o <b>romaneio/lista de coleta</b> correspondente impresso. <span class="t clock">5 min</span></li>
-      <li>Conte os pacotes e confira com o número de pedidos do dia (bateu? segue). <span class="t clock">5 min</span></li>
-      <li><b>Leve ao ponto de coleta</b> (ou entregue à coleta que passa na Zeig). Peça/guarde o <b>comprovante</b>. <span class="t clock">30–45 min</span></li>
-      <li>De volta, marque no sistema o que faltar como <b>despachado</b> e avise no grupo que a expedição do dia fechou. <span class="t clock">5 min</span></li>
+      <li>Separe em <b>3 pilhas</b>: ML, TikTok, Shopee (+ pilha <b>Flex</b> à parte). <span class="t clock">5 min</span></li>
+      <li>Confira o <b>romaneio/lista de coleta</b> de cada pilha. <span class="t clock">5 min</span></li>
+      <li>Conte os pacotes × pedidos do dia (bateu? segue). <span class="t clock">5 min</span></li>
+      <li><b>Leve ao ponto de coleta</b> (ou entregue à coleta na Zeig). Guarde o <b>comprovante</b>. <span class="t clock">30–45 min</span></li>
+      <li>Marque o que faltar como <b>despachado</b> e avise no grupo. <span class="t clock">5 min</span></li>
     </ol>
   </section>
 
   <section class="total">
-    <h2><span class="n">9</span> Tempo total do dia</h2>
-    <div class="big">~4 horas</div>
-    <p>Para 90 pedidos (30 por marketplace). Com prática, cai para ~3h15.</p>
+    <h2><span class="n">12</span> Tempo total do dia</h2>
+    <div class="big">Manhã ~4h · Tarde ~30 min</div>
+    <p>90 pedidos de manhã (30 por marketplace) + passe rápido à tarde. Com prática, a manhã cai para ~3h15.</p>
     <table>
       <tr><th>Etapa</th><th>Tempo</th></tr>
       <tr><td>Ligar e logar</td><td class="c">10 min</td></tr>
-      <tr><td>Bloco Mercado Livre (30)</td><td class="c">1h05</td></tr>
-      <tr><td>Bloco TikTok Shop (30)</td><td class="c">1h05</td></tr>
-      <tr><td>Bloco Shopee (30)</td><td class="c">1h05</td></tr>
+      <tr><td>Mercado Livre + Flex (30)</td><td class="c">1h05</td></tr>
+      <tr><td>TikTok Shop (30)</td><td class="c">1h05</td></tr>
+      <tr><td>Shopee (30)</td><td class="c">1h05</td></tr>
       <tr><td>Romaneios</td><td class="c">15 min</td></tr>
       <tr><td>Ponto de coleta</td><td class="c">30–45 min</td></tr>
+      <tr><td><b>Manhã (total)</b></td><td class="c">~4h</td></tr>
+      <tr><td>Passe da tarde (vendas menores)</td><td class="c">15–30 min</td></tr>
     </table>
   </section>
 
   <section>
-    <h2><span class="n">10</span> Checklist ninja — antes de sair pra coleta</h2>
+    <h2><span class="n">13</span> Checklist ninja — antes de sair pra coleta</h2>
     <ul class="chk">
       <li>Todas as etiquetas impressas e legíveis</li>
+      <li>Flex separado e pronto antes do corte (11:00)</li>
       <li>Cada pacote conferido (ref, tamanho, cor)</li>
       <li>Etiqueta certa no pacote certo</li>
       <li>Pacotes separados por marketplace</li>
@@ -261,14 +364,15 @@
       <li>Número de pacotes bate com os pedidos do dia</li>
       <li>Nenhum pedido com prazo vencendo ficou pra trás</li>
     </ul>
-    <div class="ninja"><b>Se todos os quadradinhos estão marcados, a Dani fechou o dia como ninja.</b> Missão cumprida.</div>
+    <div class="ninja"><b>Quadradinhos todos marcados = dia fechado como ninja.</b></div>
     <div style="text-align:center"><span class="stamp">MODO NINJA · EXPEDIÇÃO</span></div>
+    <a class="pbtn" href="treinamento-dani-a4.html">🖨 Abrir versão A4 para imprimir e colar na parede</a>
   </section>
 
   <footer>
     Treinamento de expedição · <b>Zeig Jeans</b><br>
     Feito para a Dani · orientação Leandro · Julho/2026<br>
-    <span style="font-size:11.5px">Os nomes dos botões podem mudar um pouco quando o marketplace atualiza a tela — o caminho (Vendas/Pedidos → A enviar → Imprimir etiqueta) continua o mesmo.</span>
+    <span style="font-size:11.5px">Os nomes dos botões podem mudar quando o marketplace atualiza a tela — o caminho (Vendas/Pedidos → A enviar → Imprimir etiqueta) continua o mesmo.</span>
   </footer>
 
 </div>
