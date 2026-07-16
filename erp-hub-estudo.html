@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f1b34">
+<title>ERP-hub — Guia de Estudo</title>
+<style>
+  :root{
+    --brand-900:#0f1b34;--brand-800:#16244a;--brand-700:#1e3160;--brand-600:#274079;
+    --brand-500:#3557a0;--brand-400:#5c7cc4;--brand-300:#93aede;--brand-100:#dbe6f7;
+    --accent:#c98f2e;--ok:#1f9d64;--danger:#c2503a;
+    --bg:#0b1220;--surface:#121b2e;--surface-2:#17223a;--border:#24314f;
+    --text:#eaf0fb;--soft:#a7b3cc;--faint:#6b7796;
+    --r:16px;--font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);
+    line-height:1.6;font-size:17px;padding-bottom:60px}
+  .wrap{max-width:640px;margin:0 auto;padding:0 18px}
+
+  header{padding:38px 0 26px;background:
+    radial-gradient(700px 300px at 30% -10%,rgba(53,87,160,.5),transparent),var(--brand-900);
+    border-bottom:1px solid var(--border)}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.03em;font-size:19px}
+  .logo{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+    background:linear-gradient(140deg,#5c7cc4,#16244a);font-weight:900;color:#fff;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.25)}
+  h1{font-size:27px;letter-spacing:-.02em;margin:18px 0 8px;line-height:1.2}
+  .sub{color:var(--soft);font-size:15px;margin:0}
+  .pill{display:inline-block;font-size:12px;font-weight:700;color:var(--accent);
+    background:rgba(201,143,46,.14);padding:4px 11px;border-radius:999px;margin-top:14px}
+
+  nav{position:sticky;top:0;z-index:5;background:rgba(11,18,32,.9);
+    backdrop-filter:blur(10px);border-bottom:1px solid var(--border);
+    display:flex;gap:8px;overflow-x:auto;padding:11px 18px;scrollbar-width:none}
+  nav::-webkit-scrollbar{display:none}
+  nav a{white-space:nowrap;font-size:13px;font-weight:600;color:var(--soft);
+    text-decoration:none;padding:6px 12px;border:1px solid var(--border);border-radius:999px}
+  nav a:active{background:var(--surface-2)}
+
+  section{margin:30px 0}
+  h2{font-size:20px;letter-spacing:-.02em;margin:0 0 4px;display:flex;align-items:center;gap:9px}
+  h2 .n{width:26px;height:26px;flex:none;border-radius:8px;background:var(--brand-600);
+    color:#fff;font-size:13px;display:grid;place-items:center;font-weight:800}
+  .lead{color:var(--soft);font-size:15px;margin:2px 0 14px}
+
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+    padding:17px 18px;margin:12px 0}
+  .card h3{margin:0 0 6px;font-size:16px}
+  .card p{margin:0;color:var(--soft);font-size:15px}
+
+  details{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+    margin:11px 0;overflow:hidden}
+  summary{padding:15px 17px;font-weight:700;font-size:16px;cursor:pointer;
+    list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px}
+  summary::-webkit-details-marker{display:none}
+  summary .chev{color:var(--faint);transition:transform .2s;flex:none}
+  details[open] summary .chev{transform:rotate(90deg)}
+  details .body{padding:0 17px 17px;color:var(--soft);font-size:15px}
+  details .body strong{color:var(--text)}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(max-width:420px){.grid{grid-template-columns:1fr}}
+  .kpi{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px;
+    position:relative;overflow:hidden}
+  .kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--brand-500)}
+  .kpi.ok::before{background:var(--ok)}.kpi.gold::before{background:var(--accent)}
+  .kpi .l{font-size:12px;color:var(--faint);text-transform:uppercase;letter-spacing:.05em;font-weight:700}
+  .kpi .v{font-size:22px;font-weight:800;margin-top:4px}
+  .kpi .v.ok{color:var(--ok)}
+
+  ul.clean{list-style:none;padding:0;margin:10px 0}
+  ul.clean li{padding:9px 0 9px 28px;position:relative;color:var(--soft);font-size:15px;
+    border-bottom:1px solid var(--border)}
+  ul.clean li:last-child{border-bottom:0}
+  ul.clean li::before{content:"";position:absolute;left:4px;top:15px;width:8px;height:8px;
+    border-radius:50%;background:var(--brand-400)}
+  ul.clean li.done::before{background:var(--ok)}
+  ul.clean li.done::after{content:"✓";position:absolute;left:2px;top:8px;color:#fff;font-size:9px}
+  li b{color:var(--text)}
+
+  .tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;
+    background:var(--surface-2);color:var(--soft);margin-left:6px}
+  .tag.ok{background:rgba(31,157,100,.16);color:#5fd39d}
+  .tag.wait{background:rgba(201,143,46,.16);color:#e3b45f}
+
+  .flow{display:flex;flex-direction:column;gap:0;margin:14px 0}
+  .step{display:flex;gap:13px;align-items:flex-start;padding:3px 0}
+  .step .dot{flex:none;width:30px;height:30px;border-radius:50%;background:var(--brand-600);
+    color:#fff;font-weight:800;font-size:13px;display:grid;place-items:center;position:relative;z-index:1}
+  .step .line{width:2px;background:var(--border);flex:1;margin:2px 0}
+  .step-col{display:flex;flex-direction:column;align-items:center;align-self:stretch}
+  .step .txt{padding-bottom:18px}
+  .step .txt b{display:block;font-size:15px}
+  .step .txt span{color:var(--soft);font-size:14px}
+
+  .quote{border-left:3px solid var(--accent);padding:6px 0 6px 15px;margin:16px 0;
+    color:var(--text);font-size:16px;font-style:italic}
+  .glos b{color:var(--brand-300)}
+  code{background:var(--surface-2);padding:2px 6px;border-radius:6px;font-size:13px;
+    font-family:ui-monospace,Menlo,monospace;color:#c7d6f2}
+  footer{text-align:center;color:var(--faint);font-size:13px;margin:40px 0 10px}
+  .backtop{position:fixed;right:16px;bottom:16px;width:46px;height:46px;border-radius:50%;
+    background:var(--brand-600);color:#fff;display:grid;place-items:center;text-decoration:none;
+    box-shadow:0 8px 24px rgba(0,0,0,.5);font-size:20px;border:1px solid var(--brand-400)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand"><span class="logo">E</span> ERP-hub</div>
+    <h1>O que estamos construindo</h1>
+    <p class="sub">Guia de estudo do seu SaaS — leia no caminho de casa. Do zero ao produto digno de Oscar.</p>
+    <span class="pill">Atualizado · Fase 1 no ar · Folky Jeans</span>
+  </div>
+</header>
+
+<nav class="wrap" style="max-width:640px">
+  <a href="#ideia">A ideia</a>
+  <a href="#oscar">4 pilares</a>
+  <a href="#pronto">O que já roda</a>
+  <a href="#stack">A stack</a>
+  <a href="#blindagem">Blindagem</a>
+  <a href="#apis">APIs</a>
+  <a href="#proximo">Próximos passos</a>
+  <a href="#glossario">Glossário</a>
+</nav>
+
+<div class="wrap">
+
+<section id="ideia">
+  <h2><span class="n">1</span> A ideia em uma frase</h2>
+  <p class="lead">O que esse produto é, sem enrolação.</p>
+  <div class="quote">Um ERP que conecta Bling, Mercado Livre e TikTok Shop e mostra a <b>margem real</b> de cada venda — em tempo real, com conciliação dos repasses.</div>
+  <div class="card">
+    <h3>O problema que resolve</h3>
+    <p>Quem vende em marketplace vê a receita, mas não sabe quanto <em>sobra</em> depois de comissão, frete, imposto e custo do produto. O ERP-hub calcula isso venda a venda e confere se o marketplace pagou o que devia.</p>
+  </div>
+  <div class="card">
+    <h3>Cliente #1: Folky Jeans</h3>
+    <p>Família Fiorim. Vendem no Mercado Livre e TikTok Shop. Você tem acesso total — é o piloto pra provar o motor antes de oferecer a qualquer vendedor.</p>
+  </div>
+</section>
+
+<section id="oscar">
+  <h2><span class="n">2</span> Os 4 pilares (digno de Oscar)</h2>
+  <p class="lead">A régua de qualidade. Todo trabalho serve a um destes.</p>
+  <div class="grid">
+    <div class="kpi ok"><div class="l">1 · Confiável</div><div class="v">O número certo</div></div>
+    <div class="kpi"><div class="l">2 · Bonito</div><div class="v">Tem identidade</div></div>
+    <div class="kpi"><div class="l">3 · Fluido</div><div class="v">Sem fricção</div></div>
+    <div class="kpi gold"><div class="l">4 · Blindado</div><div class="v">Ninguém copia</div></div>
+  </div>
+  <details>
+    <summary>1. Confiável <span class="chev">›</span></summary>
+    <div class="body">A margem tem que bater no centavo, sempre. Conciliação que nunca esconde divergência. Dado em tempo real que não atrasa. É o que faz o cliente confiar a vida do negócio no sistema. <strong>Base já testada com 26 testes automáticos.</strong></div>
+  </details>
+  <details>
+    <summary>2. Bonito <span class="chev">›</span></summary>
+    <div class="body">Design system próprio (tema denim), tipografia, dark mode, animação sutil, telas vazias que ensinam. É o que faz o cliente sentir que <strong>isso aqui é caro e sério</strong>. Primeira versão já no ar.</div>
+  </details>
+  <details>
+    <summary>3. Fluido <span class="chev">›</span></summary>
+    <div class="body">Onboarding que se explica sozinho. Conecta o Bling em 2 cliques e já vê a margem. Zero tela morta.</div>
+  </details>
+  <details>
+    <summary>4. Blindado <span class="chev">›</span></summary>
+    <div class="body">A regra de quem-vê-o-quê mora no banco de dados, não no código. Credenciais cifradas. Kill-switch. Código privado. <strong>Foi a lição do caso anterior: conhecimento e sistema seus, protegidos.</strong></div>
+  </details>
+</section>
+
+<section id="pronto">
+  <h2><span class="n">3</span> O que já roda hoje</h2>
+  <p class="lead">Está na sua máquina, funcionando de ponta a ponta.</p>
+  <div class="grid">
+    <div class="kpi"><div class="l">Receita (demo)</div><div class="v">R$ 509,60</div></div>
+    <div class="kpi ok"><div class="l">Margem real</div><div class="v ok">R$ 195,45</div></div>
+    <div class="kpi gold"><div class="l">Margem %</div><div class="v">38,4%</div></div>
+  </div>
+  <ul class="clean">
+    <li class="done"><b>Login e cadastro</b> — cria empresa no primeiro acesso (Folky Jeans criada)</li>
+    <li class="done"><b>Multi-empresa isolado</b> — cada cliente só vê o dele (RLS)</li>
+    <li class="done"><b>Motor de margem real</b> — explode kit, detecta canal, calcula margem</li>
+    <li class="done"><b>Conciliação</b> — confere repasse do marketplace vs o devido</li>
+    <li class="done"><b>Integração Bling</b> — login seguro + importação de vendas</li>
+    <li class="done"><b>Cobrança (Stripe)</b> — assinatura + kill-switch automático</li>
+    <li class="done"><b>Design system denim</b> — dark mode, KPIs, tabela, telas limpas</li>
+  </ul>
+</section>
+
+<section id="stack">
+  <h2><span class="n">4</span> A stack (o que é cada peça)</h2>
+  <p class="lead">Pra você apresentar com propriedade pro cliente.</p>
+  <details>
+    <summary>Next.js <span class="chev">›</span></summary>
+    <div class="body">O framework que roda o site e a lógica. Uma coisa só serve a tela e o servidor. É onde vive todo o código do produto.</div>
+  </details>
+  <details>
+    <summary>Supabase <span class="chev">›</span></summary>
+    <div class="body">O banco de dados (Postgres) + login pronto. Guarda empresas, vendas, custos. É onde mora a <strong>blindagem</strong> (RLS). Foi o que você criou hoje: o projeto <code>qtagufrptfhgqwnaezxh</code>.</div>
+  </details>
+  <details>
+    <summary>Stripe <span class="chev">›</span></summary>
+    <div class="body">A cobrança das assinaturas. Quando o pagamento cai ou falha, ele avisa o sistema e libera/bloqueia o cliente sozinho (o kill-switch).</div>
+  </details>
+  <details>
+    <summary>Bling / Mercado Livre / TikTok <span class="chev">›</span></summary>
+    <div class="body">As fontes dos dados de venda. O Bling é o hub central; ML e TikTok entram como fontes diretas pra dado em tempo real.</div>
+  </details>
+</section>
+
+<section id="blindagem">
+  <h2><span class="n">5</span> Blindagem — por que ninguém copia</h2>
+  <p class="lead">O segredo do estúdio. Estude isso com carinho.</p>
+  <div class="card">
+    <h3>RLS (Row Level Security)</h3>
+    <p>Regra dentro do banco: cada empresa só enxerga as próprias linhas. Mesmo que alguém pegasse o código, sem passar pela regra do banco não vê dado de ninguém.</p>
+  </div>
+  <div class="card">
+    <h3>Cifra AES-256</h3>
+    <p>As senhas/tokens dos marketplaces ficam <em>embaralhados</em> no banco. Sem a chave, é texto sem sentido.</p>
+  </div>
+  <div class="card">
+    <h3>Kill-switch</h3>
+    <p>Se a assinatura cai, as tabelas de negócio travam sozinhas. O acesso é ligado ao pagamento, no nível do banco.</p>
+  </div>
+  <div class="quote">Conhecimento é seu, código é seu, e a proteção está no lugar mais fundo — o banco de dados. Não é promessa; é arquitetura.</div>
+</section>
+
+<section id="apis">
+  <h2><span class="n">6</span> As APIs — dado em tempo real</h2>
+  <p class="lead">O que falta pra Folky ter informação ao vivo. Cada uma tem uma parte que só você cria (o app no painel da plataforma) e uma parte que eu escrevo (o código do conector).</p>
+  <details open>
+    <summary>Bling <span class="tag ok">conector pronto</span><span class="chev">›</span></summary>
+    <div class="body">Código de login e importação já feito. <strong>Falta você criar o app no painel do Bling</strong> e me trazer as chaves (Client ID / Secret) pra conectar a Folky de verdade.</div>
+  </details>
+  <details>
+    <summary>Mercado Livre <span class="tag wait">a fazer</span><span class="chev">›</span></summary>
+    <div class="body">Eu escrevo o conector <code>src/lib/ml</code> (login, leitura de pedidos, repasses, webhook). <strong>Você cria o app em developers.mercadolivre.com.br</strong> e me passa as chaves. Aí entra pedido em tempo real.</div>
+  </details>
+  <details>
+    <summary>TikTok Shop <span class="tag wait">a fazer</span><span class="chev">›</span></summary>
+    <div class="body">Mesma estrutura, conector <code>src/lib/tiktok</code>. Você cria o app no TikTok Shop Partner Center. Webhook avisa o sistema a cada venda.</div>
+  </details>
+  <p class="lead" style="margin-top:14px">Com webhook, o dado <b>chega sozinho</b> quando a venda acontece — isso é tempo real de verdade, não ficar perguntando de minuto em minuto.</p>
+</section>
+
+<section id="proximo">
+  <h2><span class="n">7</span> Próximos passos</h2>
+  <p class="lead">A ordem que faz sentido daqui pra frente.</p>
+  <div class="flow">
+    <div class="step"><div class="step-col"><div class="dot">1</div><div class="line"></div></div><div class="txt"><b>Gerar/ver margem</b><span>Feito ✓ — motor rodou com dados de exemplo</span></div></div>
+    <div class="step"><div class="step-col"><div class="dot">2</div><div class="line"></div></div><div class="txt"><b>App do Bling</b><span>Você cria no painel → primeira importação real da Folky</span></div></div>
+    <div class="step"><div class="step-col"><div class="dot">3</div><div class="line"></div></div><div class="txt"><b>Conector Mercado Livre</b><span>Código + seu app → pedidos ao vivo</span></div></div>
+    <div class="step"><div class="step-col"><div class="dot">4</div><div class="line"></div></div><div class="txt"><b>Conector TikTok Shop</b><span>Código + seu app → vendas ao vivo</span></div></div>
+    <div class="step"><div class="step-col"><div class="dot">5</div><div class="line"></div></div><div class="txt"><b>Colocar online (Vercel)</b><span>Sair do localhost, acessar de qualquer lugar</span></div></div>
+    <div class="step"><div class="step-col"><div class="dot">6</div></div><div class="txt"><b>Agentes de IA</b><span>Alerta de margem negativa, reprecificação automática</span></div></div>
+  </div>
+</section>
+
+<section id="glossario">
+  <h2><span class="n">8</span> Glossário rápido</h2>
+  <p class="lead">Pra você falar a língua e explicar pro cliente.</p>
+  <div class="card glos"><p><b>Margem real</b> — o que sobra da venda depois de tudo: comissão, frete, imposto e custo do produto.</p></div>
+  <div class="card glos"><p><b>Conciliação</b> — conferir se o valor que o marketplace depositou bate com o que ele deveria pagar.</p></div>
+  <div class="card glos"><p><b>Kit (SKU)</b> — um produto que é composto de vários itens; o sistema "abre" o kit pra somar o custo de cada peça.</p></div>
+  <div class="card glos"><p><b>Multi-tenant</b> — um só sistema atende muitas empresas, cada uma isolada da outra.</p></div>
+  <div class="card glos"><p><b>OAuth</b> — o "entrar com" seguro; o marketplace autoriza o ERP sem você dar a senha.</p></div>
+  <div class="card glos"><p><b>Webhook</b> — o marketplace <em>avisa</em> o ERP quando algo acontece, em vez do ERP ficar perguntando.</p></div>
+  <div class="card glos"><p><b>Kill-switch</b> — o interruptor que liga/desliga o acesso do cliente conforme a assinatura.</p></div>
+</section>
+
+</div>
+
+<footer>ERP-hub · guia de estudo · leia, respira, e bora meter marcha 🚀</footer>
+<a href="#" class="backtop" aria-label="Voltar ao topo">↑</a>
+
+</body>
+</html>
