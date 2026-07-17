@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ERP-hub · Análise de Lacunas vs Benchmarks</title>
+<style>
+  :root{
+    --bg:#0d1117; --card:#161b22; --card2:#1c2430; --line:#273041;
+    --tx:#e6edf3; --muted:#9aa7b4; --faint:#6b7684;
+    --ok:#2ea043; --warn:#d29922; --bad:#f85149; --info:#388bfd;
+    --denim:#3b6ea5; --denim2:#5b8fc9;
+    --r:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--tx);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased;padding:0 0 80px}
+  .wrap{max-width:760px;margin:0 auto;padding:0 18px}
+  header{background:linear-gradient(160deg,#1a2942,#0d1117);border-bottom:1px solid var(--line);
+    padding:38px 18px 30px;text-align:center}
+  .eyebrow{color:var(--denim2);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+  h1{font-size:26px;margin:10px 0 8px;letter-spacing:-.02em}
+  header p{color:var(--muted);font-size:15px;max-width:520px;margin:0 auto}
+  h2{font-size:20px;margin:34px 0 14px;letter-spacing:-.01em;display:flex;align-items:center;gap:9px}
+  h2 .n{background:var(--denim);color:#fff;font-size:13px;width:26px;height:26px;border-radius:8px;
+    display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
+  h3{font-size:16px;margin:20px 0 8px}
+  p{margin:0 0 12px;color:#cdd6df}
+  .lead{color:var(--muted);font-size:14px;margin-bottom:18px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;margin:14px 0}
+  .legs{display:flex;flex-direction:column;gap:10px;margin:16px 0}
+  .leg{background:var(--card);border:1px solid var(--line);border-left-width:4px;border-radius:12px;
+    padding:13px 15px;display:flex;gap:12px;align-items:flex-start}
+  .leg .ic{font-size:20px;line-height:1.2;flex:0 0 auto}
+  .leg .body{flex:1;min-width:0}
+  .leg .t{font-weight:700;font-size:15px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .leg .d{color:var(--muted);font-size:13.5px;margin-top:3px}
+  .pill{font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;letter-spacing:.02em;white-space:nowrap}
+  .p-ok{background:rgba(46,160,67,.16);color:#4ac26b}
+  .p-part{background:rgba(210,153,34,.16);color:#e2b03a}
+  .p-no{background:rgba(248,81,73,.16);color:#ff6b63}
+  .leg.ok{border-left-color:var(--ok)}
+  .leg.part{border-left-color:var(--warn)}
+  .leg.no{border-left-color:var(--bad)}
+  .risk{border-left:4px solid var(--bad);background:var(--card2);border-radius:12px;padding:14px 16px;margin:12px 0}
+  .risk.med{border-left-color:var(--warn)}
+  .risk .h{font-weight:700;display:flex;gap:8px;align-items:center;font-size:15px}
+  .risk .h .lvl{font-size:11px;font-weight:800;padding:2px 8px;border-radius:6px;text-transform:uppercase}
+  .lvl.alto{background:var(--bad);color:#fff}
+  .lvl.medio{background:var(--warn);color:#20160a}
+  .risk p{font-size:13.5px;margin:8px 0 0;color:#cdd6df}
+  .risk .mit{font-size:13px;margin-top:8px;color:var(--muted)}
+  .risk .mit b{color:#8fd0a0}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin:8px 0}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--faint);font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+  .tag{display:inline-block;background:var(--card2);border:1px solid var(--line);border-radius:7px;
+    padding:2px 8px;font-size:12px;color:var(--muted);margin:2px 3px 2px 0}
+  .callout{background:linear-gradient(150deg,#12233d,#161b22);border:1px solid #22405f;border-radius:var(--r);
+    padding:18px;margin:18px 0}
+  .callout .k{color:var(--denim2);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+  ol,ul{margin:0 0 12px;padding-left:20px;color:#cdd6df}
+  li{margin:6px 0}
+  .foot{color:var(--faint);font-size:12px;text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid var(--line)}
+  a{color:var(--denim2)}
+  .phase{display:flex;gap:12px;align-items:flex-start;margin:10px 0}
+  .phase .num{background:var(--card2);border:1px solid var(--line);color:var(--denim2);font-weight:800;
+    width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .phase .pt{font-weight:700;font-size:15px}
+  .phase .pd{color:var(--muted);font-size:13.5px}
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">ERP-hub · Auditoria de Escopo</div>
+  <h1>Estamos esquecendo alguma perna?</h1>
+  <p>Nosso módulo cruzado com os ERPs de referência — Bling, Tiny, Omie, Sankhya (BR) e NetSuite, Odoo, SAP B1 (global). O que já está dentro, o que falta e os riscos que não podemos correr.</p>
+</header>
+
+<div class="wrap">
+
+  <h2><span class="n">1</span> As 12 pernas do processo</h2>
+  <p class="lead">Todo ERP de e-commerce sério cobre este ciclo: <b>do pedido ao dinheiro</b> (order-to-cash), <b>da compra ao pagamento</b> (procure-to-pay) e <b>do lançamento ao relatório</b> (record-to-report). Marcamos onde estamos.</p>
+
+  <div class="legs">
+    <div class="leg ok"><div class="ic">📦</div><div class="body">
+      <div class="t">1. Cadastro & Produtos (PIM) <span class="pill p-ok">temos</span></div>
+      <div class="d">SKU, kits/combos, variações. Nosso motor já explode kit em componentes.</div>
+    </div></div>
+
+    <div class="leg ok"><div class="ic">🛒</div><div class="body">
+      <div class="t">2. Pedidos multicanal (OMS) <span class="pill p-ok">temos</span></div>
+      <div class="d">Importação de Mercado Livre, TikTok Shop e Bling, normalizados num formato só.</div>
+    </div></div>
+
+    <div class="leg no"><div class="ic">🏬</div><div class="body">
+      <div class="t">3. Estoque em tempo real <span class="pill p-no">falta</span></div>
+      <div class="d">Sincronização multicanal p/ evitar vender o que não tem (oversell). Hoje delegado ao Bling.</div>
+    </div></div>
+
+    <div class="leg no"><div class="ic">🧾</div><div class="body">
+      <div class="t">4. Fiscal · NF-e / SPED <span class="pill p-no">falta (legal)</span></div>
+      <div class="d">Emissão de NF-e e obrigações acessórias (SPED, ECD/ECF). <b>Obrigatório por lei.</b> Hoje coberto via Bling.</div>
+    </div></div>
+
+    <div class="leg part"><div class="ic">🚚</div><div class="body">
+      <div class="t">5. Expedição & Logística <span class="pill p-part">parcial</span></div>
+      <div class="d">Etiquetas, picking, rastreio. Temos a "tripla checagem" de contagem por canal, mas não a integração de envio.</div>
+    </div></div>
+
+    <div class="leg part"><div class="ic">💰</div><div class="body">
+      <div class="t">6. Contas a receber / a pagar <span class="pill p-part">parcial</span></div>
+      <div class="d">AR/AP. Temos o repasse esperado por venda; falta a esteira formal de vencimentos e baixa.</div>
+    </div></div>
+
+    <div class="leg ok"><div class="ic">🏦</div><div class="body">
+      <div class="t">7. Conciliação bancária <span class="pill p-ok">temos ★</span></div>
+      <div class="d">Mercado Pago plugado + motor de conciliação: cruza o que caiu de verdade com a venda. <b>Nosso diferencial.</b></div>
+    </div></div>
+
+    <div class="leg ok"><div class="ic">📊</div><div class="body">
+      <div class="t">8. Precificação & Margem real <span class="pill p-ok">temos ★★</span></div>
+      <div class="d">Margem real por venda (comissão, frete, embalagem, logística, devolução). <b>O coração — quase ninguém faz bem.</b></div>
+    </div></div>
+
+    <div class="leg no"><div class="ic">📈</div><div class="body">
+      <div class="t">9. DRE & relatórios gerenciais <span class="pill p-no">falta</span></div>
+      <div class="d">Demonstração de resultado, fluxo de caixa projetado. É o que o Omie usa como trunfo.</div>
+    </div></div>
+
+    <div class="leg no"><div class="ic">🏭</div><div class="body">
+      <div class="t">10. Compras & Fornecedores <span class="pill p-no">falta</span></div>
+      <div class="d">Pedido de compra, custo de reposição, entrada de mercadoria. Alimenta o CMV real.</div>
+    </div></div>
+
+    <div class="leg no"><div class="ic">↩️</div><div class="body">
+      <div class="t">11. Devoluções & Pós-venda <span class="pill p-no">falta</span></div>
+      <div class="d">Logística reversa. O motor já tem o campo "devolução", mas falta o fluxo que a alimenta automático.</div>
+    </div></div>
+
+    <div class="leg no"><div class="ic">📢</div><div class="body">
+      <div class="t">12. Publicação de anúncios <span class="pill p-no">falta</span></div>
+      <div class="d">Criar/atualizar anúncio nos canais a partir do ERP. Hoje só lemos; não escrevemos.</div>
+    </div></div>
+  </div>
+
+  <div class="callout">
+    <div class="k">Leitura rápida</div>
+    <p style="margin:0">Das 12 pernas: <b>4 fortes</b> (2 delas nosso diferencial), <b>3 parciais</b>, <b>5 ausentes</b>. Nenhuma ausência é fatal <i>hoje</i> porque o Bling cobre estoque + NF-e por baixo. O risco é depender do Bling pra sempre — o objetivo é internalizar por perna, na ordem certa.</p>
+  </div>
+
+  <h2><span class="n">2</span> O que já está dentro</h2>
+  <div class="card">
+    <p><span class="tag">Multi-tenant + RLS</span><span class="tag">Kill-switch por assinatura</span><span class="tag">Cifra AES-256-GCM</span><span class="tag">Billing Stripe</span></p>
+    <p><span class="tag">Conector Bling</span><span class="tag">Conector Mercado Livre</span><span class="tag">Conector TikTok Shop</span><span class="tag">Conector Mercado Pago</span></p>
+    <p><span class="tag">Motor de margem real</span><span class="tag">Explode kit</span><span class="tag">Detecção de canal por CNPJ</span><span class="tag">Conciliação de repasses</span><span class="tag">Tripla checagem de contagem</span></p>
+    <p style="margin:0;color:var(--muted);font-size:13.5px">41 testes automatizados · TypeScript estrito · build de produção limpo.</p>
+  </div>
+
+  <h2><span class="n">3</span> O que esquecemos (e a decisão)</h2>
+  <p class="lead">Priorizado por impacto no negócio da Folky. Nem tudo precisa ser nosso agora — parte é decisão de <i>construir vs. delegar ao Bling</i>.</p>
+
+  <table>
+    <thead><tr><th>Perna</th><th>Impacto</th><th>Decisão sugerida</th></tr></thead>
+    <tbody>
+      <tr><td><b>Fiscal / NF-e</b></td><td>Legal, crítico</td><td>Delegar ao Bling agora; internalizar só quando escalar</td></tr>
+      <tr><td><b>Estoque tempo real</b></td><td>Operacional alto</td><td>Ler do Bling já; próximo alvo nosso</td></tr>
+      <tr><td><b>Contas a pagar/receber + DRE</b></td><td>Financeiro alto</td><td>Construir — é extensão natural do nosso motor</td></tr>
+      <tr><td><b>Custo real / CMV</b></td><td>Precisão da margem</td><td>Construir cedo — sem custo real a margem é estimada</td></tr>
+      <tr><td><b>Expedição / etiquetas</b></td><td>Operacional médio</td><td>Delegar; integrar depois (Melhor Envio / correios)</td></tr>
+      <tr><td><b>Devoluções auto</b></td><td>Margem médio</td><td>Construir — o campo já existe no motor</td></tr>
+      <tr><td><b>Publicar anúncios</b></td><td>Crescimento</td><td>Fase avançada (escrever nos canais)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <div class="k">Decisão de arquitetura</div>
+    <p style="margin:0">O ERP-hub nasce como <b>camada de inteligência financeira sobre o Bling</b>, não como substituto imediato dele. Fiscal e estoque ficam no Bling; nós dominamos <b>margem, conciliação e caixa</b> — onde o Bling é fraco. Internalizamos perna por perna conforme a Folky (e os próximos clientes) precisarem. Isso reduz risco e acelera o valor real.</p>
+  </div>
+
+  <h2><span class="n">4</span> Riscos que não podemos correr</h2>
+
+  <div class="risk">
+    <div class="h"><span class="lvl alto">Alto</span> Não-conformidade fiscal</div>
+    <p>Vender sem NF-e correta = multa e bloqueio. Não podemos gerar nota errada.</p>
+    <p class="mit"><b>Mitigação:</b> a NF-e continua saindo pelo Bling (homologado). Nós só <b>lemos</b> a nota; não emitimos até ter certificação própria.</p>
+  </div>
+
+  <div class="risk">
+    <div class="h"><span class="lvl alto">Alto</span> Oversell (vender sem estoque)</div>
+    <p>Sem estoque sincronizado em tempo real, dá pra vender o que não existe → cancelamento e queda de reputação no marketplace.</p>
+    <p class="mit"><b>Mitigação:</b> estoque permanece no Bling como fonte da verdade até termos sync próprio com webhook.</p>
+  </div>
+
+  <div class="risk">
+    <div class="h"><span class="lvl alto">Alto</span> LGPD · dados de compradores</div>
+    <p>Importamos pedidos com nome/endereço de clientes finais. Vazamento é responsabilidade legal.</p>
+    <p class="mit"><b>Mitigação:</b> guardar só o necessário, cifrado; isolar por tenant (RLS já ativo); política de retenção. <b>A revisar antes de escalar.</b></p>
+  </div>
+
+  <div class="risk med">
+    <div class="h"><span class="lvl medio">Médio</span> "Tempo real" ainda é por consulta</div>
+    <p>Hoje puxamos por polling (a cada importação), não por webhook. Você pediu <i>real time</i> — ainda não é de verdade.</p>
+    <p class="mit"><b>Mitigação:</b> adicionar webhooks de ML/TikTok/MP p/ atualizar na hora que o evento acontece.</p>
+  </div>
+
+  <div class="risk med">
+    <div class="h"><span class="lvl medio">Médio</span> Margem estimada vs. real</div>
+    <p>Sem custo de compra real (CMV), o custo do produto é cadastrado à mão — a margem fica boa, mas não exata.</p>
+    <p class="mit"><b>Mitigação:</b> perna de Compras alimentando o custo real por SKU.</p>
+  </div>
+
+  <div class="risk med">
+    <div class="h"><span class="lvl medio">Médio</span> Mapa de conciliação a validar</div>
+    <p>O cruzamento MP × venda depende do <code>external_reference</code>. Ainda não vimos o formato real da Folky.</p>
+    <p class="mit"><b>Mitigação:</b> primeira sincronização com dado real valida o mapa antes de confiar nos números.</p>
+  </div>
+
+  <div class="risk med">
+    <div class="h"><span class="lvl medio">Médio</span> Dependência de um único ERP-base</div>
+    <p>Apoiar tudo no Bling cria ponto único. Se o Bling mudar API ou preço, sentimos.</p>
+    <p class="mit"><b>Mitigação:</b> os conectores diretos (ML/TikTok/MP) já nos dão fonte independente do Bling p/ o núcleo financeiro.</p>
+  </div>
+
+  <h2><span class="n">5</span> Ordem sugerida (sem quebrar o que anda)</h2>
+  <div class="phase"><div class="num">1</div><div><div class="pt">Ligar o dado real</div><div class="pd">Chaves ML + Mercado Pago → validar conciliação com número de verdade.</div></div></div>
+  <div class="phase"><div class="num">2</div><div><div class="pt">Custo real (CMV) + Compras</div><div class="pd">Margem deixa de ser estimada e passa a ser exata.</div></div></div>
+  <div class="phase"><div class="num">3</div><div><div class="pt">Contas a receber/pagar + DRE</div><div class="pd">Fecha o financeiro — extensão natural do motor.</div></div></div>
+  <div class="phase"><div class="num">4</div><div><div class="pt">Estoque em tempo real (webhooks)</div><div class="pd">Elimina oversell e entrega o "real time" de verdade.</div></div></div>
+  <div class="phase"><div class="num">5</div><div><div class="pt">Devoluções, expedição, anúncios</div><div class="pd">Pernas de crescimento, depois da base sólida.</div></div></div>
+
+  <div class="foot">
+    ERP-hub · auditoria de escopo · jul/2026<br>
+    Benchmarks: Bling · Tiny · Omie · Sankhya · NetSuite · Odoo · SAP Business One
+  </div>
+</div>
+</body>
+</html>
