@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f1b34">
+<title>ERP-hub — Suas chaves (ML + TikTok)</title>
+<style>
+  :root{
+    --brand-900:#0f1b34;--brand-600:#274079;--brand-500:#3557a0;--brand-400:#5c7cc4;--brand-300:#93aede;
+    --ml:#ffe600;--ml-ink:#2d3277;--tt:#ff0050;--accent:#c98f2e;--ok:#1f9d64;--danger:#c2503a;
+    --bg:#0b1220;--surface:#121b2e;--surface-2:#17223a;--border:#24314f;
+    --text:#eaf0fb;--soft:#a7b3cc;--faint:#6b7796;--r:16px;
+    --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.6;font-size:17px;padding-bottom:60px}
+  .wrap{max-width:640px;margin:0 auto;padding:0 18px}
+  header{padding:36px 0 24px;background:radial-gradient(700px 300px at 30% -10%,rgba(53,87,160,.5),transparent),var(--brand-900);border-bottom:1px solid var(--border)}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.03em;font-size:19px}
+  .logo{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(140deg,#5c7cc4,#16244a);font-weight:900;color:#fff}
+  h1{font-size:26px;letter-spacing:-.02em;margin:16px 0 8px;line-height:1.2}
+  .sub{color:var(--soft);font-size:15px;margin:0}
+  .split{display:flex;gap:11px;margin:16px 0 2px}
+  .split b{color:var(--faint);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+  .divi{display:flex;flex-direction:column;gap:5px;flex:1;padding:12px 14px;background:var(--surface);border:1px solid var(--border);border-radius:12px}
+  .divi .who{font-size:12px;color:var(--faint);text-transform:uppercase;letter-spacing:.05em;font-weight:700}
+  .divi .what{font-size:14px;color:var(--soft)}
+  .divi.me{border-color:rgba(31,157,100,.35)}
+  .divi.me .who{color:#5fd39d}
+
+  section{margin:26px 0}
+  .platform{display:flex;align-items:center;gap:11px;margin-bottom:4px}
+  .badge-p{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-weight:900;font-size:15px}
+  .badge-p.ml{background:var(--ml);color:var(--ml-ink)}
+  .badge-p.tt{background:var(--tt);color:#fff}
+  h2{font-size:20px;margin:0;letter-spacing:-.02em}
+  .lead{color:var(--soft);font-size:14px;margin:2px 0 14px}
+
+  ol.steps{list-style:none;counter-reset:s;padding:0;margin:0}
+  ol.steps li{counter-increment:s;position:relative;padding:14px 16px 14px 54px;background:var(--surface);border:1px solid var(--border);border-radius:14px;margin:9px 0}
+  ol.steps li::before{content:counter(s);position:absolute;left:14px;top:14px;width:28px;height:28px;border-radius:8px;background:var(--brand-600);color:#fff;font-weight:800;font-size:14px;display:grid;place-items:center}
+  ol.steps li b{color:var(--text)}
+  ol.steps li span{display:block;color:var(--soft);font-size:14.5px;margin-top:2px}
+  a.link{color:var(--brand-300);text-decoration:none;border-bottom:1px solid var(--border)}
+  code{background:var(--surface-2);padding:3px 8px;border-radius:7px;font-size:13.5px;font-family:ui-monospace,Menlo,monospace;color:#c7d6f2;word-break:break-all;display:inline-block}
+  .copy{display:flex;align-items:center;gap:8px;justify-content:space-between;margin-top:8px;background:var(--surface-2);border:1px solid var(--border);border-radius:9px;padding:8px 10px}
+  .copy code{background:none;padding:0}
+  .give{margin-top:10px;padding:12px 14px;border-radius:12px;background:linear-gradient(140deg,rgba(31,157,100,.14),var(--surface));border:1px solid rgba(31,157,100,.3)}
+  .give b{color:#5fd39d}
+  .give p{margin:4px 0 0;font-size:14px;color:var(--soft)}
+  .warn{margin-top:9px;padding:11px 14px;border-radius:12px;background:rgba(201,143,46,.12);border:1px solid rgba(201,143,46,.3);font-size:14px;color:#e3b45f}
+  .secret{margin-top:9px;padding:11px 14px;border-radius:12px;background:rgba(194,80,58,.12);border:1px solid rgba(194,80,58,.35);font-size:14px;color:#e79a88}
+  footer{text-align:center;color:var(--faint);font-size:13px;margin:38px 0 10px}
+  .backtop{position:fixed;right:16px;bottom:16px;width:46px;height:46px;border-radius:50%;background:var(--brand-600);color:#fff;display:grid;place-items:center;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.5);font-size:20px;border:1px solid var(--brand-400)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand"><span class="logo">E</span> ERP-hub</div>
+    <h1>Suas chaves — dado real</h1>
+    <p class="sub">O código dos conectores já está pronto e testado. Falta só a sua parte: criar os apps e me trazer as chaves. Siga daqui pelo celular.</p>
+    <div class="split">
+      <div class="divi me"><span class="who">Eu já fiz</span><span class="what">todo o código: login, leitura de pedidos, cálculo de margem, testes</span></div>
+      <div class="divi"><span class="who">Sua parte</span><span class="what">criar o app em cada portal e copiar as 2 chaves</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<section>
+  <div class="platform"><span class="badge-p ml">ML</span><h2>Mercado Livre</h2></div>
+  <p class="lead">O mais simples — 5 min. Comece por ele.</p>
+  <ol class="steps">
+    <li><b>Abra o portal e faça login</b><span><a class="link" href="https://developers.mercadolivre.com.br" target="_blank">developers.mercadolivre.com.br</a> — entre com a conta da Folky que vende no ML.</span></li>
+    <li><b>Criar aplicação</b><span>Menu "Suas aplicações" → "Criar nova aplicação". Nome: <code>ERP-hub Folky</code>.</span></li>
+    <li><b>Cole a URL de retorno (Redirect URI)</b>
+      <div class="copy"><code>http://localhost:3000/api/ml/callback</code></div>
+    </li>
+    <li><b>Marque a permissão de leitura de pedidos</b><span>Em "Scopes": <code>read</code> (pedidos/orders). Salve.</span></li>
+    <li><b>Copie as 2 chaves</b><span>A aplicação vai mostrar o <b>App ID</b> (número) e o <b>Secret Key</b>.</span></li>
+  </ol>
+  <div class="give"><b>Me manda:</b><p>o <b>App ID</b> (pode colar no chat numa boa).</p></div>
+  <div class="secret"><b>Secret Key:</b> é sensível. Quando eu pedir, te mostro a linha exata do arquivo pra você colar você mesmo — sem passar pelo chat.</div>
+</section>
+
+<section>
+  <div class="platform"><span class="badge-p tt">TT</span><h2>TikTok Shop</h2></div>
+  <p class="lead">Um pouco mais de passos (tem assinatura de segurança). Depois do ML.</p>
+  <ol class="steps">
+    <li><b>Entre no Partner Center</b><span><a class="link" href="https://partner.tiktokshop.com" target="_blank">partner.tiktokshop.com</a> — login com a conta da loja Folky no TikTok Shop.</span></li>
+    <li><b>Vá em "Manage Apps" → "Create App"</b><span>Tipo: app próprio (self-developed / para a sua loja). Nome: <code>ERP-hub Folky</code>.</span></li>
+    <li><b>Adicione a permissão de Pedidos</b><span>Em "App Permission": <b>Order (Read)</b>. É o que deixa ler as vendas.</span></li>
+    <li><b>Cole a URL de retorno (Callback)</b>
+      <div class="copy"><code>http://localhost:3000/api/tiktok/callback</code></div>
+    </li>
+    <li><b>Copie as 2 chaves</b><span>Na página do app: <b>App Key</b> e <b>App Secret</b>.</span></li>
+    <li><b>Autorize sua loja no app</b><span>Botão "Authorize" / "Add shop" — liga a loja Folky ao app. É o que gera o acesso aos pedidos.</span></li>
+  </ol>
+  <div class="give"><b>Me manda:</b><p>o <b>App Key</b> (pode colar no chat).</p></div>
+  <div class="secret"><b>App Secret:</b> sensível, mesma regra do ML — você cola direto no arquivo com meu direcionamento.</div>
+  <div class="warn">⚠️ O TikTok às vezes só aceita URL de retorno com domínio real (https), não <code>localhost</code>. Se ele reclamar, a gente resolve na hora que subir o app pro ar (Vercel) e troca a URL. Me avisa se aparecer esse erro.</div>
+</section>
+
+<section>
+  <div class="platform"><span class="badge-p" style="background:var(--ok);color:#04220f">✓</span><h2>Depois que me mandar</h2></div>
+  <ol class="steps">
+    <li><b>Eu ponho as chaves no sistema</b><span>Você cola os secrets com meu direcionamento, sem expor no chat.</span></li>
+    <li><b>Você clica "Conectar" no painel</b><span>ML ou TikTok → autoriza na tela da plataforma.</span></li>
+    <li><b>Você clica "Importar"</b><span>E a margem real da Folky aparece na tela, ao vivo. Esse é o teste de verdade.</span></li>
+  </ol>
+</section>
+
+</div>
+
+<footer>ERP-hub · suas chaves · a gente divide, e vence 🚀</footer>
+<a href="#" class="backtop" aria-label="Voltar ao topo">↑</a>
+
+</body>
+</html>
